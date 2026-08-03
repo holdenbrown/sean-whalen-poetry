@@ -1,5 +1,9 @@
 export const aboutContent = {
-  railLabel: "ABOUT / 01",
+  railLabels: {
+    biography: "BIO / 01",
+    poetics: "POETICS / 02",
+    work: "WORK / 03",
+  },
   title: "About",
   introduction: "Sean Whalen is a poet from rural Boone County, Iowa.",
   biography: [

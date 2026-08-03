@@ -1,17 +1,85 @@
 {
   "subject": "Sean Whalen, poet near Pilot Mound, Iowa",
-  "lastChecked": "2026-08-02",
+  "lastChecked": "2026-08-03",
   "policy": {
-    "repositoryStorage": "No third-party image binaries are stored in this repository.",
-    "websiteUse": "Reference only until Sean supplies or approves a source file and confirms photographer credit and web-use rights.",
+    "repositoryStorage": "Store only user-supplied imagery or explicitly licensed/public-domain imagery with recorded provenance.",
+    "websiteUse": "Use media only when its source, credit, and reuse rights are recorded; otherwise keep it as a research reference.",
     "privacy": "Do not identify people in unlabeled group photographs by visual guesswork."
   },
   "summary": {
-    "confirmedSourcePhotos": 3,
-    "highResolutionCandidates": 1,
-    "clearedForWebsiteUse": 0,
+    "confirmedSourcePhotos": 4,
+    "highResolutionCandidates": 2,
+    "clearedForWebsiteUse": 1,
+    "productionHero": "usda-northeast-iowa-aerial-2017",
     "bestLicensingLead": "thimble-studio-portrait-2024"
   },
+  "landscapeSources": [
+    {
+      "id": "usda-northeast-iowa-aerial-2017",
+      "description": "Directly photographed aerial view of terraced fields, wooded ridges, and a winding waterway in northeast Iowa from 10,000 feet.",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:20170506-OC-PJK-0169_(34455904506).jpg",
+      "originalRecord": "https://www.flickr.com/photos/usdagov/34455904506/",
+      "directAssetUrl": "https://live.staticflickr.com/4158/34455904506_fdbd86c59f_o.jpg",
+      "date": "2017-05-06T13:22:47",
+      "photographer": "Preston Keres",
+      "agency": "U.S. Department of Agriculture Office of Communications-Photography Services Center",
+      "camera": "Panasonic DMC-LX100",
+      "pixelDimensions": {
+        "width": 2850,
+        "height": 1900
+      },
+      "fileSizeBytes": 2131321,
+      "sha256": "C2269283868A9DB7EBA793E73E1D6E86971D43CCF719CE68BE9250FC9BF6B6E4",
+      "license": "Public domain",
+      "rightsStatus": "cleared for website use as a work of a USDA employee made as part of official duties",
+      "storedLocally": true,
+      "localPath": "docs/research/sean-whalen/northeast-iowa-aerial-original.jpg",
+      "websiteDerivatives": [
+        {
+          "localPath": "public/images/northeast-iowa-aerial-1920.jpg",
+          "format": "image/jpeg",
+          "pixelDimensions": {
+            "width": 1920,
+            "height": 1280
+          },
+          "fileSizeBytes": 511689,
+          "sha256": "82F0A04E5D4F24E2CC7F994677934595A18D788C8E84F92988AE96275FEC5FCF"
+        },
+        {
+          "localPath": "public/images/northeast-iowa-aerial-960.jpg",
+          "format": "image/jpeg",
+          "pixelDimensions": {
+            "width": 960,
+            "height": 640
+          },
+          "fileSizeBytes": 139706,
+          "sha256": "416DE50024160C178376D68B1B43EE3C58512C532772096355C5811E1941F446"
+        },
+        {
+          "localPath": "public/images/northeast-iowa-aerial-1920.webp",
+          "format": "image/webp",
+          "pixelDimensions": {
+            "width": 1920,
+            "height": 1280
+          },
+          "fileSizeBytes": 338740,
+          "sha256": "A5FA2330BDAE4398AD3EE5F17D2D9F626D4B3AB43531ED33D403ECFEDD8AE433"
+        },
+        {
+          "localPath": "public/images/northeast-iowa-aerial-960.webp",
+          "format": "image/webp",
+          "pixelDimensions": {
+            "width": 960,
+            "height": 640
+          },
+          "fileSizeBytes": 97582,
+          "sha256": "1D1B6365BF26BB17364A2EF7394FD74EC6D393B40265452FEE9BF26CDABDB0C8"
+        }
+      ],
+      "derivativeProcessing": "Lanczos resizing, 4:2:0 chroma subsampling, and JPEG compression only",
+      "generativeProcessing": "none"
+    }
+  ],
   "portraitSources": [
     {
       "id": "thimble-studio-portrait-2024",

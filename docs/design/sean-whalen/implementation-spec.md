@@ -16,9 +16,24 @@ range, and the mobile hero places its landscape between the introduction and act
 - `about-desktop.png`: About page composition and editorial-description band.
 - `home-mobile.png`: mobile header, hero, actions, media crop, and stacked rows.
 
-The central production artwork is `public/images/field-drainage.png`. It is an original,
-non-documentary field-and-water abstraction and must not be described as Sean's home or a
-specific location.
+The central production image comes from
+`docs/research/sean-whalen/northeast-iowa-aerial-original.jpg`. It is a real USDA aerial
+photograph of northeast Iowa made by Preston Keres from 10,000 feet on May 6, 2017. The
+source record identifies the camera, exposure, capture time, and directly photographed
+scene, and marks the federal-government work as public domain. The public hero serves
+non-generative, resized WebP derivatives at 1,920 and 960 pixels wide, with JPEG
+fallbacks and a 10-pixel inline blur placeholder. The image may be described as northeast
+Iowa, but must not be described as Sean's home or a specific location connected to him.
+
+- Source: `https://commons.wikimedia.org/wiki/File:20170506-OC-PJK-0169_(34455904506).jpg`
+- Credit: USDA photo by Preston Keres
+- Rights: public domain
+- Archived-original SHA-256: `C2269283868A9DB7EBA793E73E1D6E86971D43CCF719CE68BE9250FC9BF6B6E4`
+
+The unverified synthetic-looking field abstraction shown in the original concept
+screenshots was removed from production on 2026-08-03. The verified photograph above is
+an intentional asset-only deviation; layout, edge fade, crop behavior, palette,
+typography, and copy remain governed by the accepted concepts.
 
 ## Color and typography lock
 
@@ -43,9 +58,22 @@ specific location.
 - Read selected work
 - About Sean
 - Poet · Rural Boone County, Iowa
-- LINE / 01
+- INTRO / 01
+- USDA photo by Preston Keres
 
 No eyebrow, badge, proof chip, statistic, extra subtitle, or new claim may be added.
+
+## Rail notation system
+
+- Every field-rail mark uses the literal format `SECTION / NN`.
+- Numbering restarts at `01` on each route and increments without gaps from top to bottom.
+- Labels describe the section they sit beside; atmospheric codenames are not used.
+- Home: `INTRO / 01`, `WORK / 02`, `ABOUT / 03`, `INDEX / 04`.
+- Work: `OVERVIEW / 01`, `THESIS / 02`, `INDEX / 03`.
+- About: `BIO / 01`, `POETICS / 02`, `WORK / 03`.
+- On narrow screens, the section term and ordinal occupy two deliberate lines inside the
+  3.5rem rail; the browser must not wrap the notation into arbitrary fragments.
+- The rail is decorative and `aria-hidden`; semantic headings continue to define the page.
 
 ## Surface inventory
 
@@ -54,6 +82,10 @@ No eyebrow, badge, proof chip, statistic, extra subtitle, or new claim may be ad
 - Large two-line name, supporting line, two actions, factual location line.
 - Desktop media occupies the right half and blends into the cream content edge with a
   cream edge fade only; there is no tint or overlay over the image.
+- The aerial photograph uses a 122% crop biased toward its upper-left terracing so the
+  image reads as a composed landscape rather than a survey plate. Apply the desktop fade
+  to the fixed media frame—not the scaled image—so the cream-to-photograph transition
+  remains broad and visible at every crop.
 - Mobile stacks the name and introduction, a wide intrinsic-ratio media frame, then the
   actions and factual line. The artwork is part of the hero composition rather than a
   separate block after the actions.

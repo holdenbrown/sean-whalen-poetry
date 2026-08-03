@@ -105,7 +105,7 @@
   --reading-max-width: 46rem;
   --page-gutter: clamp(1.25rem, 3vw, 3.25rem);
   --field-rail-width: 7.5rem;
-  --field-rail-mobile-width: 2.5rem;
+  --field-rail-mobile-width: 3.5rem;
   --header-height: 5rem;
   --motion-fast: 160ms;
   --motion-medium: 520ms;
@@ -242,6 +242,7 @@
     letter-spacing: 0.02em;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .field-content {
@@ -335,14 +336,43 @@
     position: relative;
     min-height: clamp(34rem, 72svh, 45rem);
     overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 26%,
+      black 100%
+    );
+    mask-image: linear-gradient(to right, transparent 0%, black 26%, black 100%);
+  }
+
+  .hero-picture {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 
   .hero-artwork {
+    display: block;
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: center;
-    mask-image: linear-gradient(to right, transparent 0%, black 16%, black 100%);
+    object-position: 42% 42%;
+    transform: scale(1.22);
+    transform-origin: 36% 32%;
+  }
+
+  .hero-photo-credit {
+    position: absolute;
+    right: var(--space-md);
+    bottom: var(--space-md);
+    z-index: 1;
+    padding: var(--space-xs) var(--space-sm);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    color: var(--foreground);
+    font-family: var(--font-code);
+    font-size: 0.625rem;
+    line-height: 1.4;
+    text-decoration: none;
   }
 
   .publication-row {
@@ -387,7 +417,16 @@
     .field-rail-mark {
       top: calc(var(--header-height) + 1rem);
       padding-inline: 0.5rem;
-      font-size: 0.625rem;
+      font-size: 0.5625rem;
+      white-space: normal;
+    }
+
+    .field-rail-mark > span {
+      display: block;
+    }
+
+    .field-rail-sequence {
+      margin-top: var(--space-xs);
     }
 
     .display-hero {
@@ -423,11 +462,9 @@
     }
 
     .hero-media {
-      aspect-ratio: 1586 / 992;
+      aspect-ratio: 3 / 2;
       min-height: 0;
-    }
-
-    .hero-artwork {
+      -webkit-mask-image: none;
       mask-image: none;
     }
 

@@ -107,7 +107,7 @@ export default function AboutPage() {
     <div className="site-frame overflow-hidden">
       <StructuredData data={aboutSchema} />
       <FieldSection
-        railLabel={aboutContent.railLabel}
+        railLabel={aboutContent.railLabels.biography}
         aria-labelledby="about-title"
         className="relative border-b border-border"
         contentClassName="relative pt-site-xl pb-site-2xl lg:pt-site-xl lg:pb-site-2xl"
@@ -162,10 +162,11 @@ export default function AboutPage() {
       </FieldSection>
 
       <FieldSection
-        railLabel=""
+        railLabel={aboutContent.railLabels.poetics}
         aria-labelledby="on-the-page-title"
         className="relative overflow-hidden bg-primary text-primary-foreground"
         railClassName="border-primary-foreground/30"
+        railMarkClassName="!text-primary-foreground"
         contentClassName="relative grid gap-10 py-site-3xl lg:grid-cols-3 lg:gap-16 lg:py-site-4xl"
       >
         <ContourLines className="contour-right text-primary-foreground opacity-5" />
@@ -185,7 +186,7 @@ export default function AboutPage() {
       </FieldSection>
 
       <FieldSection
-        railLabel=""
+        railLabel={aboutContent.railLabels.work}
         aria-label="About page actions"
         className="border-b border-border"
         contentClassName="py-site-2xl"

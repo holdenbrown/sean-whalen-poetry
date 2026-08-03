@@ -39,16 +39,43 @@ export default function HomePage() {
         </div>
 
         <div className="hero-media">
-          <Image
-            src={withBasePath(homeContent.hero.artwork.src)}
-            alt={homeContent.hero.artwork.alt}
-            width={1586}
-            height={992}
-            sizes="(min-width: 768px) 55vw, 100vw"
-            loading="eager"
-            fetchPriority="high"
-            className="hero-artwork"
-          />
+          <picture className="hero-picture">
+            <source
+              media="(max-width: 47.999rem)"
+              type="image/webp"
+              srcSet={withBasePath(homeContent.hero.artwork.mobileSrcWebp)}
+            />
+            <source
+              media="(min-width: 48rem)"
+              type="image/webp"
+              srcSet={withBasePath(homeContent.hero.artwork.srcWebp)}
+            />
+            <source
+              media="(max-width: 47.999rem)"
+              srcSet={withBasePath(homeContent.hero.artwork.mobileSrc)}
+            />
+            <Image
+              src={withBasePath(homeContent.hero.artwork.src)}
+              alt={homeContent.hero.artwork.alt}
+              width={homeContent.hero.artwork.width}
+              height={homeContent.hero.artwork.height}
+              sizes="(min-width: 768px) 55vw, 100vw"
+              loading="eager"
+              fetchPriority="high"
+              placeholder="blur"
+              blurDataURL={homeContent.hero.artwork.blurDataURL}
+              className="hero-artwork"
+            />
+          </picture>
+          <a
+            href={homeContent.hero.artwork.sourceHref}
+            className="hero-photo-credit focus-editorial"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {homeContent.hero.artwork.credit}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </div>
 
         <div className="hero-actions reveal-up">
@@ -161,6 +188,7 @@ export default function HomePage() {
         aria-labelledby="archive-title"
         className="bg-dark-band text-dark-band-foreground"
         railClassName="border-dark-band-foreground/35"
+        railMarkClassName="!text-dark-band-foreground"
         contentClassName="grid items-center gap-10 py-site-3xl lg:grid-cols-[1fr_auto] lg:py-site-4xl"
       >
         <div>

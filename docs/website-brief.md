@@ -53,11 +53,13 @@
   paired with a sturdy humanist sans for navigation and metadata.
 - Reference links or approved concept: A project-local Image Gen concept produced from
   this brief before implementation; no external site's identity or layout is in scope.
-- Image/illustration direction: Original topographic and field-record imagery—contour
-  lines, prairie horizon, drainage paths, weather, and survey notation. The commissioning
-  user supplied Sean's watermarked portrait for the About page; preserve the watermark,
-  credit Stacy McDonald / The Photician visibly, and record the source. Keep all text and
-  navigation code-native.
+- Image/illustration direction: Documentary, rights-cleared photography plus original
+  non-photographic contour and survey motifs—prairie horizon, drainage paths, weather,
+  and field notation. Do not use synthetic or unverified photoreal imagery. The homepage
+  uses a public-domain 2017 USDA aerial photograph of northeast Iowa by Preston Keres.
+  The commissioning user supplied Sean's watermarked portrait for the About page;
+  preserve the watermark, credit Stacy McDonald / The Photician visibly, and record the
+  source. Keep all text and navigation code-native.
 - Motion direction: Subtle line-drawing, editorial reveals, and horizontal drift that
   suggest weather or a map being unfolded; always respect reduced-motion preferences.
 - Explicit visual exclusions: Quills, typewriters, parchment cosplay, rustic barnwood,

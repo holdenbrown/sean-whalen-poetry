@@ -819,7 +819,11 @@ export const selectedWorks: readonly Work[] = selectedWorkIds.map((id) => {
 })
 
 export const workPageContent = {
-  railLabel: "INDEX / 01",
+  railLabels: {
+    overview: "OVERVIEW / 01",
+    thesis: "THESIS / 02",
+    index: "INDEX / 03",
+  },
   title: "Work",
   summary: `${publicationCount} publication records · ${uniqueWorkCount} verified works overall · Latest publication ${publicationYears.latest}`,
   description: `A source-linked index of ${publicationCount} separately published poems and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,

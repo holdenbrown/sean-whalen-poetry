@@ -1,8 +1,9 @@
+import { heroArtwork } from "@/content/media"
 import { publicationYears, uniqueWorkCount } from "@/content/works"
 
 export const homeContent = {
   hero: {
-    railLabel: "LINE / 01",
+    railLabel: "INTRO / 01",
     title: "Sean Whalen",
     description:
       "Poems attentive to land, labor, memory, and the precise strangeness of rural life.",
@@ -15,15 +16,12 @@ export const homeContent = {
       href: "/about",
     },
     identity: "Poet · Rural Boone County, Iowa",
-    artwork: {
-      src: "/images/field-drainage.png",
-      alt: "Abstract aerial fields divided by winding water.",
-    },
+    artwork: heroArtwork,
   },
   socialSummary:
     "Poems attentive to land, labor, memory, and the precise strangeness of rural life.",
   selectedPublications: {
-    railLabel: "WEATHER / 03",
+    railLabel: "WORK / 02",
     title: "Selected publications",
     description:
       "A small selection of Sean’s work, linked to the journals and issues where it appeared.",
@@ -47,7 +45,7 @@ export const homeContent = {
     },
   },
   about: {
-    railLabel: "ABOUT / 04",
+    railLabel: "ABOUT / 03",
     title: "About Sean",
     paragraphs: [
       "Sean Whalen lives near Pilot Mound in rural Boone County, Iowa. He holds an M.A. in Creative Writing from Iowa State University.",
@@ -77,7 +75,7 @@ export const homeContent = {
     },
   },
   archive: {
-    railLabel: "INDEX / 05",
+    railLabel: "INDEX / 04",
     title: `Work, ${publicationYears.earliest}–present`,
     description: `Explore ${uniqueWorkCount} source-linked works across journal publications and the 2004 thesis Small ecologies.`,
     action: {

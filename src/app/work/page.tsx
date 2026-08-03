@@ -128,7 +128,7 @@ export default function WorkPage() {
     <div className="site-frame">
       <StructuredData data={workSchema} />
       <FieldSection
-        railLabel={workPageContent.railLabel}
+        railLabel={workPageContent.railLabels.overview}
         aria-labelledby="work-title"
         contentClassName="py-site-3xl lg:py-site-4xl"
       >
@@ -149,11 +149,11 @@ export default function WorkPage() {
       </FieldSection>
 
       <FieldSection
-        railLabel="ARCHIVE / 02"
+        railLabel={workPageContent.railLabels.thesis}
         aria-labelledby="thesis-title"
         className="border-y border-primary-foreground/30 bg-primary text-primary-foreground"
         railClassName="border-primary-foreground/30"
-        railMarkClassName="text-primary-foreground"
+        railMarkClassName="!text-primary-foreground"
         contentClassName="py-site-2xl lg:py-site-3xl"
       >
         <div className="grid gap-10 lg:grid-cols-5 lg:gap-16">
@@ -207,7 +207,7 @@ export default function WorkPage() {
       </FieldSection>
 
       <FieldSection
-        railLabel="INDEX / 03"
+        railLabel={workPageContent.railLabels.index}
         aria-label="Source-linked publication records"
         className="border-b border-border"
         contentClassName="py-site-2xl lg:py-site-3xl"

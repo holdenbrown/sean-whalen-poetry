@@ -90,12 +90,10 @@
 
 ## Deployment
 
-- Production origin: `https://sean-whalen-poetry.nukebom27.chatgpt.site` for the current
-  live review build, supplied through `NEXT_PUBLIC_SITE_URL`; localhost remains the safe
-  development fallback.
-- Hosting platform: Sites provides the current live phone-review build. The GitHub Pages
-  workflow remains configured for the later repository handoff. Vercel is explicitly out
-  of scope.
+- Production origin: `https://holdenbrown.github.io/sean-whalen-poetry`, supplied through
+  `NEXT_PUBLIC_SITE_URL`; localhost remains the safe development fallback.
+- Hosting platform: GitHub Pages through the repository's GitHub Actions workflow. Vercel
+  and Sites are explicitly out of scope.
 - Root path or repository subpath: Deployment-aware through the starter's base-path
   utilities.
 - Preview and approval flow: Local browser review at desktop and mobile sizes, complete

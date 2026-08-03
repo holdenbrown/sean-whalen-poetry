@@ -1,0 +1,375 @@
+{
+  "collection": {
+    "id": "small-ecologies",
+    "title": "Small ecologies",
+    "author": "Sean Brian Whalen",
+    "type": "M.A. thesis",
+    "institution": "Iowa State University",
+    "department": "Department of English",
+    "major": "English (Creative Writing)",
+    "place": "Ames, Iowa",
+    "year": 2004,
+    "copyright": "Copyright Sean Brian Whalen, 2004. All rights reserved.",
+    "repositoryRecord": "https://dr.lib.iastate.edu/entities/publication/e0a96ac6-5e09-4a66-a7de-29e6cd67df48",
+    "handleUrl": "https://dr.lib.iastate.edu/handle/20.500.12876/69962",
+    "doiUrl": "https://doi.org/10.31274/rtd-180813-6997",
+    "pdfUrl": "https://dr.lib.iastate.edu/server/api/core/bitstreams/9f0f284c-784b-494d-a55f-b5a190cdcfe6/content",
+    "repositoryUuid": "e0a96ac6-5e09-4a66-a7de-29e6cd67df48",
+    "poemCount": 46,
+    "exactTitleOverlapWithPreexistingIndex": 6,
+    "exactTitleAdditionsToIndex": 40,
+    "publicationCreditCount": 14,
+    "verification": "confirmed_primary_source",
+    "identityNotes": "The full name, Iowa State creative-writing degree, dedication to Bonnie, and Pilot Mound-specific poem establish this as the same Sean Whalen.",
+    "rightsStatus": "link only until Sean grants permission; the thesis states all rights reserved",
+    "publicationCreditsNote": "Page 68 says the credited poems first appeared in the named venues, sometimes as earlier versions. A missing date, issue, or page has not been guessed."
+  },
+  "contents": [
+    {
+      "section": "I",
+      "page": 2,
+      "title": "Crow at Dawn",
+      "existingWorkId": "crow-at-dawn",
+      "earlierAppearance": {
+        "venue": "The Midwest Quarterly",
+        "issue": "44.1",
+        "date": "Autumn 2002",
+        "recordUrl": "https://www.poetryexplorer.net/poem26.php?pid=12599253"
+      }
+    },
+    {
+      "section": "I",
+      "page": 3,
+      "title": "Night Moose—Dry Fork Ridge, Bighorn Mountains, Wyoming",
+      "latestTitle": "Night Moose, Dry Fork Ridge, Bighorns",
+      "laterAppearance": {
+        "venue": "Last Leaves",
+        "issue": "9",
+        "date": "Fall 2024",
+        "page": 2,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_ccf9c63a610f4142a3426e58558fce3a.pdf",
+        "relationship": "same poem, substantially revised and retitled"
+      },
+      "countingNote": "Count as one work with two confirmed title forms, not as two unique works."
+    },
+    {
+      "section": "I",
+      "page": 4,
+      "title": "Chicken Time",
+      "existingWorkId": "chicken-time",
+      "earlierAppearance": {
+        "venue": "Flyway",
+        "issue": "3.3",
+        "date": "Winter 1997",
+        "recordUrl": "https://www.poetryexplorer.net/poem26.php?pid=12599252"
+      }
+    },
+    {
+      "section": "I",
+      "page": 5,
+      "title": "My Father the Fireman"
+    },
+    {
+      "section": "I",
+      "page": 6,
+      "title": "Nebraska Elemental",
+      "earlierAppearance": {
+        "venue": "The Mid-America Poetry Review",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    },
+    {
+      "section": "I",
+      "page": 7,
+      "title": "Departure, Arrival",
+      "existingWorkId": "departure-arrival",
+      "earlierAppearance": {
+        "venue": "Mid-American Review",
+        "issue": "XXIV.2",
+        "date": "Spring 2004",
+        "recordUrl": "https://casit.bgsu.edu/midamericanreview/volume-xxiv-no-2/"
+      }
+    },
+    {
+      "section": "I",
+      "page": 9,
+      "title": "First Bear Sighting in a Century—Effigy Mounds National Monument",
+      "earlierAppearance": {
+        "venue": "Plainsongs",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    },
+    {
+      "section": "I",
+      "page": 11,
+      "title": "Mr. Bowie says"
+    },
+    {
+      "section": "I",
+      "page": 12,
+      "title": "Burning Ants"
+    },
+    {
+      "section": "I",
+      "page": 13,
+      "title": "July 4th, 1976"
+    },
+    {
+      "section": "I",
+      "page": 14,
+      "title": "2 Quarters and the Aspect of Mars—Colorado Springs, August 2003"
+    },
+    {
+      "section": "I",
+      "page": 15,
+      "title": "The Passage of South Dakota, and other stories"
+    },
+    {
+      "section": "II",
+      "page": 19,
+      "title": "Crow in Love",
+      "existingWorkId": "crow-in-love",
+      "earlierAppearance": {
+        "venue": "Flyway",
+        "issue": "6.2",
+        "date": "Fall 2001",
+        "recordUrl": "https://www.poetryexplorer.net/poem26.php?pid=12599254"
+      }
+    },
+    {
+      "section": "II",
+      "page": 21,
+      "title": "Waiting After Work for My Wife"
+    },
+    {
+      "section": "II",
+      "page": 22,
+      "title": "Eidetic"
+    },
+    {
+      "section": "II",
+      "page": 24,
+      "title": "At 2 am"
+    },
+    {
+      "section": "II",
+      "page": 25,
+      "title": "Some Kitchen in Kansas",
+      "sourceNote": "The thesis credits a line from Debra Marquart's story Three Mile Limit in The Hunger Bone (2001) as inspiration; this is not a prior-publication credit."
+    },
+    {
+      "section": "II",
+      "page": 26,
+      "title": "Two Fish"
+    },
+    {
+      "section": "II",
+      "page": 27,
+      "title": "All A Levee Knows"
+    },
+    {
+      "section": "II",
+      "page": 28,
+      "title": "One Good Crop"
+    },
+    {
+      "section": "II",
+      "page": 29,
+      "title": "At the Des Moines Ordnance Plant—10 January, 1944"
+    },
+    {
+      "section": "II",
+      "page": 30,
+      "title": "Garbology"
+    },
+    {
+      "section": "II",
+      "page": 31,
+      "title": "The Disinfectant Girl",
+      "existingWorkId": "the-disinfectant-girl",
+      "laterAppearanceNote": "A substantially revised version appeared in Thimble Literary Magazine 7.2 in 2024."
+    },
+    {
+      "section": "II",
+      "page": 32,
+      "title": "Watching Television"
+    },
+    {
+      "section": "II",
+      "page": 33,
+      "title": "The Body Creates the Body"
+    },
+    {
+      "section": "II",
+      "page": 34,
+      "title": "The Birthing Stones",
+      "earlierAppearance": {
+        "venue": "Lyrical Iowa 2001",
+        "date": "2001",
+        "page": 9,
+        "award": "First Place—Adult General",
+        "scanUrl": "https://books.google.com/books?id=ruGd9OyDnLQC&pg=RA1-PA9&vq=Sean+Whalen"
+      }
+    },
+    {
+      "section": "II",
+      "page": 35,
+      "title": "Napkins",
+      "earlierAppearance": {
+        "venue": "The Blind Man's Rainbow",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    },
+    {
+      "section": "II",
+      "page": 37,
+      "title": "The Intimacy of Scarf",
+      "possibleRelatedLaterTitle": "Scarf",
+      "relationshipStatus": "unconfirmed; retain as a separate exact title"
+    },
+    {
+      "section": "II",
+      "page": 38,
+      "title": "The Dance of the Ritual Scar",
+      "earlierAppearance": {
+        "venue": "Sketch",
+        "issue": "64.1",
+        "date": "1999",
+        "pages": "86–87",
+        "recordUrl": "https://dr.lib.iastate.edu/handle/20.500.12876/87798"
+      }
+    },
+    {
+      "section": "II",
+      "page": 40,
+      "title": "Lunching With Emma"
+    },
+    {
+      "section": "II",
+      "page": 41,
+      "title": "Planting Time"
+    },
+    {
+      "section": "II",
+      "page": 43,
+      "title": "epidemiology"
+    },
+    {
+      "section": "II",
+      "page": 44,
+      "title": "Spring New Crop"
+    },
+    {
+      "section": "III",
+      "page": 46,
+      "title": "Given Name"
+    },
+    {
+      "section": "III",
+      "page": 47,
+      "title": "Failed",
+      "existingWorkId": "failed",
+      "earlierAppearance": {
+        "venue": "Flyway",
+        "issue": "5.1–2",
+        "date": "Fall/Winter 1999–2000",
+        "recordUrl": "https://www.poetryexplorer.net/poem26.php?pid=12599255"
+      }
+    },
+    {
+      "section": "III",
+      "page": 48,
+      "title": "To The Boy, To James Lawson",
+      "publicationCreditTitle": "To the Boy, To James Lawson",
+      "earlierAppearance": {
+        "venue": "Grasslands Review",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    },
+    {
+      "section": "III",
+      "page": 50,
+      "title": "The Last Battle for Quarter-Section Run",
+      "tocTitleVariant": "The Last battle for Quarter-Section Run"
+    },
+    {
+      "section": "III",
+      "page": 51,
+      "title": "To Steven Spielberg, Contemplating Destroying the Abandoned Bank in Pilot Mound, Iowa During the Filming of Twister"
+    },
+    {
+      "section": "III",
+      "page": 52,
+      "title": "“What would you do with a brain if you had one?”"
+    },
+    {
+      "section": "III",
+      "page": 54,
+      "title": "Dog as First Stone"
+    },
+    {
+      "section": "III",
+      "page": 55,
+      "title": "Scatology"
+    },
+    {
+      "section": "III",
+      "page": 57,
+      "title": "A Field Previously Plowed",
+      "earlierAppearance": {
+        "venue": "The Mid-America Poetry Review",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    },
+    {
+      "section": "III",
+      "page": 58,
+      "title": "The Stump"
+    },
+    {
+      "section": "III",
+      "page": 60,
+      "title": "No Answer From the Trees",
+      "tocTitleVariant": "No Answer From The Trees"
+    },
+    {
+      "section": "III",
+      "page": 61,
+      "title": "Chainsaw Sculptor",
+      "earlierAppearance": {
+        "venue": "Lyrical Iowa 2003",
+        "date": "2003",
+        "page": 27,
+        "dedication": "for Mary Swander",
+        "scanUrl": "https://books.google.com/books?id=q1Mx-5pwjbgC&pg=RA1-PA27&vq=Sean+Whalen"
+      }
+    },
+    {
+      "section": "III",
+      "page": 62,
+      "title": "November Elemental",
+      "earlierAppearance": {
+        "venue": "The Sow's Ear Poetry Review",
+        "issue": null,
+        "date": "before 2004",
+        "page": null,
+        "verification": "thesis_publication_credit"
+      }
+    }
+  ]
+}

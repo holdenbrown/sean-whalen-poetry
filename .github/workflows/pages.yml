@@ -1,0 +1,105 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Resolve canonical URL and base path
+        shell: bash
+        env:
+          SITE_URL_OVERRIDE: ${{ vars.SITE_URL }}
+          BASE_PATH_OVERRIDE: ${{ vars.BASE_PATH }}
+        run: |
+          repository_name="${GITHUB_REPOSITORY#*/}"
+
+          if [[ -n "$BASE_PATH_OVERRIDE" ]]; then
+            if [[ "$BASE_PATH_OVERRIDE" == "/" ]]; then
+              base_path=""
+            else
+              base_path="/${BASE_PATH_OVERRIDE#/}"
+              base_path="${base_path%/}"
+            fi
+          elif [[ "$repository_name" == *.github.io ]]; then
+            base_path=""
+          else
+            base_path="/$repository_name"
+          fi
+
+          if [[ -n "$SITE_URL_OVERRIDE" ]]; then
+            site_url="${SITE_URL_OVERRIDE%/}"
+          else
+            site_url="https://${GITHUB_REPOSITORY_OWNER}.github.io${base_path}"
+          fi
+
+          echo "NEXT_PUBLIC_BASE_PATH=$base_path" >> "$GITHUB_ENV"
+          echo "NEXT_PUBLIC_SITE_URL=$site_url" >> "$GITHUB_ENV"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run source checks
+        run: pnpm check
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run browser and accessibility checks
+        run: pnpm test:e2e
+        env:
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: http://127.0.0.1:4173
+
+      - name: Build deployable static site
+        run: pnpm build
+
+      - name: Inspect generated output
+        run: pnpm check:built
+        env:
+          REQUIRE_PRODUCTION_URL: "true"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

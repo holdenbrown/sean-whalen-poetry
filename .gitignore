@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Next.js and static output
+.next/
+out/
+dist/
+
+# Test and quality output
+coverage/
+playwright-report/
+test-results/
+
+# Protected local blank-template snapshot and portable archive
+exports/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and package-manager caches
+*.log
+*.tsbuildinfo
+.pnpm-store/

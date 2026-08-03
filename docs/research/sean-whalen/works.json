@@ -1,0 +1,782 @@
+{
+  "dataset": {
+    "subject": "Sean Whalen",
+    "subjectQualifier": "poet near Pilot Mound, rural Boone County, Iowa",
+    "lastChecked": "2026-08-02",
+    "status": "public-source research index; not a claim of a complete private bibliography",
+    "counts": {
+      "uniqueWorkRecords": 82,
+      "distinctConfirmedTitleFormsIncludingRetitles": 83,
+      "additionalLaterAppearanceEvents": 4,
+      "titleUnresolvedPublicationCredits": 4,
+      "unresolvedForthcomingClaims": 1
+    },
+    "copyrightPolicy": "Metadata and outbound links only. Do not place full poem text or publisher images on the future website until Sean confirms rights and grants permission.",
+    "identityPolicy": "Admit a work only when the source directly matches the Pilot Mound/Boone County identity fingerprint or forms part of the corroborated early-publication chain."
+  },
+  "identityFingerprint": {
+    "location": "near Pilot Mound in rural Boone County, Iowa",
+    "education": "M.A. in Creative Writing from Iowa State University",
+    "career": "retired health-and-safety professional",
+    "communityRole": "volunteer fire chief",
+    "primaryAnchors": [
+      "https://stonepoetryjournal.com/sean-whalen/",
+      "https://www.gyroscopereview.com/2026/04/poet-pick-sean-whalen/",
+      "https://floatingacornreview.com/2026/01/04/sean-whalen-iowa-perspective/",
+      "https://pilotmound.org/2021/02/01/pilot-mound-gets-a-aed/"
+    ]
+  },
+  "fieldNotes": {
+    "confidenceValues": {
+      "confirmed_direct": "The publication page or issue connects the work to the full identity fingerprint.",
+      "confirmed_chain": "The title is linked through Sean's corroborated early bibliography, but the surviving item lacks a modern location-rich bio."
+    },
+    "accessValues": {
+      "online_text": "The publisher displays the poem online.",
+      "issue_pdf": "The publisher supplies a PDF or page scan.",
+      "toc_or_record": "A title-level table of contents or bibliographic record is available, but not the poem text."
+    },
+    "indexStructure": "The works array contains 42 separately verified work records. The Small ecologies collection index contains 46 poem records, including six exact-title overlaps with works and 40 exact-title additions, for 82 unique works overall. One poem was substantially revised and retitled, producing 83 distinct confirmed title forms."
+  },
+  "collections": [
+    {
+      "id": "small-ecologies",
+      "title": "Small ecologies",
+      "author": "Sean Brian Whalen",
+      "type": "M.A. thesis",
+      "institution": "Iowa State University",
+      "major": "English (Creative Writing)",
+      "year": 2004,
+      "poemCount": 46,
+      "exactTitleAdditions": 40,
+      "contentsIndex": "./small-ecologies.json",
+      "repositoryRecord": "https://dr.lib.iastate.edu/entities/publication/e0a96ac6-5e09-4a66-a7de-29e6cd67df48",
+      "handleUrl": "https://dr.lib.iastate.edu/handle/20.500.12876/69962",
+      "doiUrl": "https://doi.org/10.31274/rtd-180813-6997",
+      "verification": "confirmed_primary_source",
+      "websiteUse": "link_only_until_author_permission"
+    }
+  ],
+  "works": [
+    {
+      "id": "chicken-time",
+      "title": "Chicken Time",
+      "firstPublication": {
+        "venue": "Flyway",
+        "issue": "3.3",
+        "date": "Winter 1997",
+        "url": "https://www.poetryexplorer.net/poem26.php?pid=12599252"
+      },
+      "verification": "confirmed_chain",
+      "access": "toc_or_record",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "Secondary bibliographic index; no open first-party text located."
+    },
+    {
+      "id": "failed",
+      "title": "Failed",
+      "firstPublication": {
+        "venue": "Flyway",
+        "issue": "5.1–2",
+        "date": "Fall/Winter 1999–2000",
+        "url": "https://www.poetryexplorer.net/poem26.php?pid=12599255"
+      },
+      "verification": "confirmed_chain",
+      "access": "toc_or_record",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "Secondary bibliographic index; no open first-party text located."
+    },
+    {
+      "id": "crow-in-love",
+      "title": "Crow in Love",
+      "firstPublication": {
+        "venue": "Flyway",
+        "issue": "6.2",
+        "date": "Fall 2001",
+        "url": "https://www.poetryexplorer.net/poem26.php?pid=12599254"
+      },
+      "verification": "confirmed_chain",
+      "access": "toc_or_record",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "Secondary bibliographic index; no open first-party text located."
+    },
+    {
+      "id": "crow-at-dawn",
+      "title": "Crow at Dawn",
+      "firstPublication": {
+        "venue": "The Midwest Quarterly",
+        "issue": "XLIV.1",
+        "date": "Autumn 2002",
+        "recordUrl": "https://www.poetryexplorer.net/poem26.php?pid=12599253"
+      },
+      "laterPublicationEvents": [
+        {
+          "type": "authorized_republication_and_author_commentary",
+          "venue": "Gyroscope Review Poet Pick",
+          "date": "2026-04-23",
+          "url": "https://www.gyroscopereview.com/2026/04/poet-pick-sean-whalen/"
+        }
+      ],
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "Sean explicitly identifies the original Midwest Quarterly publication in his first-person Gyroscope commentary."
+    },
+    {
+      "id": "a-birth-in-autumn",
+      "title": "A Birth in Autumn",
+      "firstPublication": {
+        "venue": "Lyrical Iowa 2002",
+        "date": "2002",
+        "page": 12,
+        "url": "https://books.google.com/books?id=q1Mx-5pwjbgC&pg=PA12&vq=Sean+Whalen"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "The page scan identifies Sean Whalen of Pilot Mound. It includes historical contact information, so link to the source but do not embed or reproduce the scan on the website."
+    },
+    {
+      "id": "departure-arrival",
+      "title": "Departure, Arrival",
+      "firstPublication": {
+        "venue": "Mid-American Review",
+        "issue": "XXIV.2",
+        "date": "Spring 2004",
+        "url": "https://casit.bgsu.edu/midamericanreview/volume-xxiv-no-2/"
+      },
+      "verification": "confirmed_chain",
+      "access": "toc_or_record",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "Official table of contents; print text unavailable online."
+    },
+    {
+      "id": "across-the-section",
+      "title": "Across the Section",
+      "firstPublication": {
+        "venue": "Founder's Favourites",
+        "issue": "22",
+        "date": "March 2023",
+        "page": 13,
+        "issueUrl": "https://foundersfavourites.blogspot.com/p/2023.html",
+        "scanUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9sMvoO0mbq8Wuk77X7IwWU0tLiPEyenWjuk_vCG2KRuW45xeZLnrG52peGvxBxCfe2tZw-ydUoCRT-haSGToqCA_-nkKGUUVwWusnkVH45BXOX5_BLiSCHrhwcHmms5OvjEletDuscPXp9Y85F_DID2rMBi0QqJZJnqEpcAZpopLQfNcUOU7wZrgo2A/s2000/FF22%20p12,13.jpg"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "menards-january-aisle-9",
+      "title": "Menard’s, January, Aisle #9",
+      "firstPublication": {
+        "venue": "Founder's Favourites",
+        "issue": "22",
+        "date": "March 2023",
+        "page": 12,
+        "issueUrl": "https://foundersfavourites.blogspot.com/p/2023.html",
+        "scanUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9sMvoO0mbq8Wuk77X7IwWU0tLiPEyenWjuk_vCG2KRuW45xeZLnrG52peGvxBxCfe2tZw-ydUoCRT-haSGToqCA_-nkKGUUVwWusnkVH45BXOX5_BLiSCHrhwcHmms5OvjEletDuscPXp9Y85F_DID2rMBi0QqJZJnqEpcAZpopLQfNcUOU7wZrgo2A/s2000/FF22%20p12,13.jpg"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-sunny-lee",
+      "title": "The Sunny Lee",
+      "firstPublication": {
+        "venue": "Halcyon Days",
+        "issue": "29",
+        "date": "2023",
+        "page": 9,
+        "url": "https://halcyondaysmagazine.blogspot.com/p/2023.html"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-unflowering-pear",
+      "title": "The Unflowering Pear",
+      "firstPublication": {
+        "venue": "Halcyon Days",
+        "issue": "29",
+        "date": "2023",
+        "page": 12,
+        "url": "https://halcyondaysmagazine.blogspot.com/p/2023.html"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "buffet",
+      "title": "Buffet",
+      "firstPublication": {
+        "venue": "Last Leaves",
+        "issue": "6: Hunger",
+        "date": "Spring 2023",
+        "page": 61,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_23bc200f74354aad96484419089a7b26.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "crumbs",
+      "title": "Crumbs",
+      "firstPublication": {
+        "venue": "Last Leaves",
+        "issue": "6: Hunger",
+        "date": "Spring 2023",
+        "page": 66,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_23bc200f74354aad96484419089a7b26.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "cathedral",
+      "title": "Cathedral",
+      "firstPublication": {
+        "venue": "Last Leaves",
+        "issue": "6: Hunger",
+        "date": "Spring 2023",
+        "page": 68,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_23bc200f74354aad96484419089a7b26.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-run",
+      "title": "The Run",
+      "firstPublication": {
+        "venue": "After Happy Hour Review",
+        "issue": "21",
+        "date": "Fall/Winter 2023",
+        "page": 23,
+        "url": "https://afterhappyhourreview.com/Issue%2021.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "drainage-ditch-number-one-hundred-seven",
+      "title": "Drainage Ditch Number One Hundred Seven",
+      "firstPublication": {
+        "venue": "Smoky Blue Literary and Arts Magazine",
+        "issue": "19",
+        "date": "Fall/Winter 2023",
+        "page": 118,
+        "url": "https://sblaam.com/wp-content/uploads/2023/08/SBLAAM19.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-hen",
+      "title": "The Hen",
+      "firstPublication": {
+        "venue": "Smoky Blue Literary and Arts Magazine",
+        "issue": "19",
+        "date": "Fall/Winter 2023",
+        "page": 119,
+        "url": "https://sblaam.com/wp-content/uploads/2023/08/SBLAAM19.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "scarf",
+      "title": "Scarf",
+      "firstPublication": {
+        "venue": "Oakwood",
+        "issue": "5.2",
+        "date": "2024",
+        "page": 48,
+        "url": "https://openprairie.sdstate.edu/oakwood/vol5/iss2/1/"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-rifle",
+      "title": "The Rifle",
+      "firstPublication": {
+        "venue": "Oakwood",
+        "issue": "5.2",
+        "date": "2024",
+        "page": 49,
+        "url": "https://openprairie.sdstate.edu/oakwood/vol5/iss2/1/"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-kids-play-the-first-circle",
+      "title": "The Kids Play ‘The First Circle’ at State Jazz While Ms. Hannah Battles Stage Four Cancer",
+      "firstPublication": {
+        "venue": "Unbroken",
+        "issue": "42",
+        "date": "Summer 2024",
+        "url": "https://www.theunjournals.com/unbroken42"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "in-the-den-of-nagaina",
+      "title": "In the Den of Nagaina",
+      "firstPublication": {
+        "venue": "New Feathers Anthology",
+        "issue": "5.2",
+        "date": "Summer 2024",
+        "url": "https://www.newfeathersanthology.com/in-the-den-of-nagaina.html"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "4-99",
+      "title": "4.99",
+      "firstPublication": {
+        "venue": "Stone Poetry Quarterly",
+        "date": "August 2024",
+        "url": "https://stonepoetryjournal.com/sean-whalen/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "trophies",
+      "title": "Trophies",
+      "firstPublication": {
+        "venue": "Stone Poetry Quarterly",
+        "date": "August 2024",
+        "url": "https://stonepoetryjournal.com/sean-whalen/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-disinfectant-girl",
+      "title": "The Disinfectant Girl",
+      "firstPublication": {
+        "venue": "Small ecologies",
+        "publicationType": "M.A. thesis",
+        "institution": "Iowa State University",
+        "date": "2004",
+        "page": 31,
+        "handleUrl": "https://dr.lib.iastate.edu/handle/20.500.12876/69962",
+        "doiUrl": "https://doi.org/10.31274/rtd-180813-6997"
+      },
+      "laterPublicationEvents": [
+        {
+          "type": "substantially_revised_later_publication",
+          "venue": "Thimble Literary Magazine",
+          "issue": "7.2",
+          "date": "Fall 2024",
+          "page": 20,
+          "poemUrl": "https://www.thimblelitmag.com/2024/07/05/the-disinfectant-girl/",
+          "issueUrl": "https://www.thimblelitmag.com/wp-content/uploads/7.2WithPicsAN.pdf"
+        }
+      ],
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "The 2004 thesis predates the Thimble appearance. Direct comparison shows that the 2024 publication is substantially revised."
+    },
+    {
+      "id": "the-paper-girl",
+      "title": "The Paper Girl",
+      "firstPublication": {
+        "venue": "Last Leaves",
+        "issue": "9",
+        "date": "Fall 2024",
+        "page": 11,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_ccf9c63a610f4142a3426e58558fce3a.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "The issue's contributor bio identifies Sean as living near Pilot Mound and matches the established career and education fingerprint."
+    },
+    {
+      "id": "take-a-shiny-penny",
+      "title": "Take a Shiny Penny",
+      "firstPublication": {
+        "venue": "Assignment Literary Magazine",
+        "issue": "Winter 2024: Erosion",
+        "date": "2024-12-20",
+        "page": 11,
+        "issueUrl": "https://www.assignmentmag.com/issues/winter-2024-erosion",
+        "pdfUrl": "https://cdnm.heyzine.com/files/uploaded/c3e930be0ce5111fe3f05397ffe28625dc3ad001-1.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "cold-front",
+      "title": "Cold Front",
+      "firstPublication": {
+        "venue": "Men Matters Online Journal",
+        "issue": "9",
+        "date": "December 2024",
+        "url": "https://menmattersonlinejournal.com/issue-9-sean-whalen/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "self-portrait-alternatively",
+      "title": "Self-portrait, Alternatively",
+      "firstPublication": {
+        "venue": "Men Matters Online Journal",
+        "issue": "9",
+        "date": "December 2024",
+        "url": "https://menmattersonlinejournal.com/issue-9-sean-whalen/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "hubris-effigy-mounds-national-monument",
+      "title": "Hubris, Effigy Mounds National Monument",
+      "firstPublication": {
+        "venue": "Right Hand Pointing",
+        "issue": "159",
+        "date": "Spring 2025",
+        "url": "https://www.issues.righthandpointing.net/159"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "he-mows",
+      "title": "He Mows",
+      "firstPublication": {
+        "venue": "Right Hand Pointing",
+        "issue": "159",
+        "date": "Spring 2025",
+        "url": "https://www.issues.righthandpointing.net/159"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "long-walk",
+      "title": "Long Walk",
+      "firstPublication": {
+        "venue": "Steam Ticket",
+        "issue": "28",
+        "date": "2025",
+        "page": 12,
+        "url": "https://www.uwlax.edu/globalassets/academics/departments/english/publications/steam-ticket-volume-28.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "transcontinental",
+      "title": "Transcontinental",
+      "firstPublication": {
+        "venue": "Gyroscope Review",
+        "issue": "Summer 2025",
+        "date": "2025-07-01",
+        "page": 37,
+        "issueUrl": "https://www.gyroscopereview.com/2025/07/summer-2025-issue/",
+        "pdfUrl": "https://www.gyroscopereview.com/wp-content/uploads/2025/06/Summer-2025-Final-Web-with-cover.pdf"
+      },
+      "laterPublicationEvents": [
+        {
+          "type": "year_end_anthology_republication",
+          "venue": "Gyroscope Review 2025 Year End Anthology",
+          "date": "December 2025",
+          "url": "https://www.gyroscopereview.com/2025/12/2025-year-end-anthology/"
+        }
+      ],
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "so-we-bake-cakes-then",
+      "title": "So…We Bake Cakes Then…",
+      "firstPublication": {
+        "venue": "Songs of Eretz",
+        "issue": "Summer 2025: In the Kitchen",
+        "date": "2025-06-21",
+        "url": "https://www.songsoferetz.com/2025/06/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "sky-mine",
+      "title": "Sky Mine",
+      "firstPublication": {
+        "venue": "Songs of Eretz",
+        "issue": "Fall 2025: Digging",
+        "date": "2025-09-22",
+        "url": "https://www.songsoferetz.com/2025/09/songs-of-eretz-fall-25-digging.html"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "edward-pointing-north",
+      "title": "Edward, Pointing North, Teaches Me to Count Arriving Geese",
+      "firstPublication": {
+        "venue": "Canary",
+        "issue": "70",
+        "date": "Fall 2025",
+        "url": "https://canarylitmag.org/archive_by_issue.php?issue=70"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "false-prophet",
+      "title": "False Prophet",
+      "firstPublication": {
+        "venue": "Canary",
+        "issue": "70",
+        "date": "Fall 2025",
+        "url": "https://canarylitmag.org/archive_by_issue.php?issue=70"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "here-he-comes-dragging-his-fish",
+      "title": "Here He Comes, Dragging His Fish",
+      "firstPublication": {
+        "venue": "Men Matters Online Journal",
+        "issue": "11",
+        "date": "December 2025",
+        "authorUrl": "https://menmattersonlinejournal.com/issue-11-sean-whalen/",
+        "pdfUrl": "https://menmattersonlinejournal.com/wp-content/uploads/2025/12/Issue-11-18-Sean-Whalen.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "iowa-perspective",
+      "title": "Iowa Perspective",
+      "firstPublication": {
+        "venue": "Floating Acorn Review",
+        "issue": "5",
+        "date": "2026-01-04",
+        "url": "https://floatingacornreview.com/2026/01/04/sean-whalen-iowa-perspective/"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "marooned",
+      "title": "Marooned",
+      "firstPublication": {
+        "venue": "Naugatuck River Review",
+        "issue": "35",
+        "date": "Winter/Spring 2026",
+        "page": 82,
+        "recordUrl": "https://openurl.ebsco.com/contentitem/gcd%3A192781052",
+        "contestAnnouncementUrl": "https://web.archive.org/web/20251221020945/https://naugatuckriverreview.com/2025/12/21/naugatuck-river-reviews-17th-annual-contest-winners/",
+        "issn": "1944-0952",
+        "ebscoAccessionNumber": "192781052"
+      },
+      "verification": "confirmed_direct",
+      "access": "toc_or_record",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "The exact-title EBSCO record and Naugatuck contest result connect through Sean's identity-rich Gyroscope profile, which names him as the contest semifinalist."
+    },
+    {
+      "id": "at-the-press-conference-during-the-fire",
+      "title": "At the Press Conference During the Fire",
+      "firstPublication": {
+        "venue": "Nude Bruce Review",
+        "issue": "16",
+        "date": "March 2026",
+        "page": 22,
+        "url": "https://nudebrucereview.com/wp-content/uploads/2026/03/nbr-16-final-layout.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-prodigal-leaves-again",
+      "title": "The Prodigal Leaves Again",
+      "firstPublication": {
+        "venue": "Flowers of the Field",
+        "issue": "Inaugural issue",
+        "date": "Spring 2026",
+        "url": "https://flowers-of-the-field.com/current-edition"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "solstice",
+      "title": "Solstice",
+      "firstPublication": {
+        "venue": "Last Leaves",
+        "issue": "11: Balance",
+        "date": "Spring 2026",
+        "page": 9,
+        "url": "https://www.lastleavesmag.com/_files/ugd/dccfc8_5585047564cd4fb8b2e51ee723c6ba6c.pdf"
+      },
+      "verification": "confirmed_direct",
+      "access": "issue_pdf",
+      "websiteUse": "link_only_until_author_permission"
+    },
+    {
+      "id": "the-river-otter",
+      "title": "The River Otter",
+      "firstPublication": {
+        "venue": "Eastern Iowa Review",
+        "issue": "21",
+        "date": "2026",
+        "poemUrl": "http://www.portyonderpress.com/sean-whalen---the-river-otter.html",
+        "issueUrl": "http://www.portyonderpress.com/issue-21.html"
+      },
+      "verification": "confirmed_direct",
+      "access": "online_text",
+      "websiteUse": "link_only_until_author_permission",
+      "notes": "The poem page bio names Pilot Mound, the retired health-and-safety career, and the Iowa State M.A.; it resolves the April 2026 forthcoming credit."
+    }
+  ],
+  "titleUnresolvedPublicationCredits": [
+    {
+      "venue": "The Ocotillo Review",
+      "status": "repeated_exact_match_bio_credit",
+      "sourceUrl": "https://stonepoetryjournal.com/sean-whalen/",
+      "lead": "Volumes 7.2 (New Horizons, 2023) and 8.1 (Last Dance, 2024) are plausible print-only candidates, but no accessible table of contents proves Sean's issue or title.",
+      "candidateIssueUrls": [
+        "https://www.kallistogaiapress.org/product/the-ocotillo-review-volume-8-1/",
+        "https://www.kallistogaiapress.org/product/the-ocotillo-review-volume-8-1-last-dance/"
+      ],
+      "missing": ["title", "definitive issue", "page"]
+    },
+    {
+      "venue": "The Avenue Journal",
+      "status": "later_exact_match_bios_say_appeared",
+      "sourceUrl": "https://floatingacornreview.com/2026/01/04/sean-whalen-iowa-perspective/",
+      "lead": "Issue IX: Water, released in March 2025, is the strongest timeline match, but its contents were not available for verification.",
+      "candidateIssueUrl": "https://theavenuejournal.squarespace.com/issue-vi/p/water-issue",
+      "missing": ["title", "definitive issue", "page"]
+    },
+    {
+      "venue": "Chiron Review",
+      "issue": "136, Spring 2025",
+      "status": "contributor_list_confirmed",
+      "sourceUrl": "https://www.lulu.com/shop/michael-hathaway/chiron-review-136/paperback/product-7k6k9qd.html",
+      "isbn": "9781300559184",
+      "missing": ["title", "page"]
+    },
+    {
+      "venue": "Lyrical Iowa 2025",
+      "status": "one_poem_confirmed_for_sean_whalen_pilot_mound",
+      "sourceUrl": "https://www.vintontoday.com/articles/Et-Cetera/article1043394.html",
+      "catalogUrl": "https://books.google.com/books/about/Lyrical_Iowa_2025.html?id=6qWC0QEACAAJ",
+      "isbn": "9781733427869",
+      "missing": ["title", "page"]
+    }
+  ],
+  "unresolvedForthcomingClaims": [
+    {
+      "venue": "Chiron Review",
+      "asOf": "2026-04-23",
+      "sourceUrl": "https://www.gyroscopereview.com/2026/04/poet-pick-sean-whalen/",
+      "status": "a new appearance was described as forthcoming; issue 140 does not list Sean, and issue 141 or later was not public by 2026-08-02",
+      "excludedIssueUrl": "https://www.lulu.com/shop/michael-hathaway/chiron-review-140/paperback/product-m26v625.html",
+      "missing": ["title", "definitive issue", "publication date"]
+    }
+  ],
+  "excludedSameNameClusters": [
+    "actor Sean Whalen",
+    "Utah Lions Not Sheep entrepreneur and author Sean Whalen",
+    "UCSF/Gladstone computational biologist Sean Whalen",
+    "Kansas natural-building artist Sean Whalen",
+    "DC-area coach or novelist using SWhalenWrites",
+    "dentists, musicians, academics, and firefighters without the Pilot Mound identity fingerprint"
+  ],
+  "styleTaxonomy": {
+    "places": [
+      "Pilot Mound",
+      "Boone County",
+      "Iowa",
+      "prairie",
+      "farmstead",
+      "river valley",
+      "Effigy Mounds",
+      "hospital",
+      "domestic",
+      "commercial"
+    ],
+    "subjects": [
+      "rural life",
+      "ecology",
+      "birds",
+      "animals",
+      "water",
+      "land history",
+      "family",
+      "memory",
+      "aging",
+      "illness",
+      "mortality",
+      "grief",
+      "labor",
+      "consumer culture",
+      "myth",
+      "fire response"
+    ],
+    "forms": [
+      "free verse",
+      "prose poem",
+      "narrative lyric",
+      "couplets",
+      "quatrains",
+      "catalogue",
+      "satire",
+      "speculative poem",
+      "dramatic scene"
+    ],
+    "tones": [
+      "observational",
+      "tender",
+      "wry",
+      "elegiac",
+      "surreal",
+      "darkly comic",
+      "satirical",
+      "restrained"
+    ]
+  }
+}

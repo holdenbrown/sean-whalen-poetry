@@ -1,0 +1,108 @@
+{
+  "subject": "Sean Whalen, poet near Pilot Mound, Iowa",
+  "lastChecked": "2026-08-02",
+  "policy": {
+    "repositoryStorage": "No third-party image binaries are stored in this repository.",
+    "websiteUse": "Reference only until Sean supplies or approves a source file and confirms photographer credit and web-use rights.",
+    "privacy": "Do not identify people in unlabeled group photographs by visual guesswork."
+  },
+  "summary": {
+    "confirmedSourcePhotos": 3,
+    "highResolutionCandidates": 1,
+    "clearedForWebsiteUse": 0,
+    "bestLicensingLead": "thimble-studio-portrait-2024"
+  },
+  "portraitSources": [
+    {
+      "id": "thimble-studio-portrait-2024",
+      "description": "Professional vertical studio headshot on Sean's Thimble Literary Magazine author page. It is the strongest website portrait lead located.",
+      "sourcePage": "https://www.thimblelitmag.com/author/swhalen/",
+      "directAssetUrl": "https://www.thimblelitmag.com/wp-content/uploads/sean-whalen.jpg",
+      "mediaMetadataUrl": "https://www.thimblelitmag.com/wp-json/wp/v2/media/8522",
+      "pixelDimensions": {
+        "width": 1638,
+        "height": 2048
+      },
+      "fileSizeBytes": 671705,
+      "aspectRatio": "4:5",
+      "visualNotes": "Neutral dark studio background, professional lighting, vertical composition, and enough source resolution for responsive website crops. The published file is visibly watermarked.",
+      "identityConfidence": "confirmed",
+      "whyMatched": "The author page says Sean lives near Pilot Mound and links his poem The Disinfectant Girl.",
+      "photographer": "Stacy McDonald",
+      "publishedCredit": "STACY MCDONALD",
+      "publishedCopyrightMetadata": "STACY MCDONALD - THE PHOTICIAN",
+      "photographerAboutUrl": "https://photician.com/about",
+      "photographerContactUrl": "https://photician.com/contact",
+      "license": null,
+      "rightsStatus": "not cleared; the watermark and copyright metadata make permission especially important",
+      "storedLocally": false,
+      "recommendedAction": "Ask Sean and Stacy McDonald for the unwatermarked original plus written permission for website, social-card, press, cropping, and responsive-resizing use. Confirm the exact credit line. Do not crop out the watermark from the published copy."
+    },
+    {
+      "id": "gyroscope-portrait-2026",
+      "description": "Casual photograph of Sean with a cat, displayed at the top of his first-person Gyroscope Review Poet Pick.",
+      "sourcePage": "https://www.gyroscopereview.com/2026/04/poet-pick-sean-whalen/",
+      "directAssetUrl": "https://www.gyroscopereview.com/wp-content/uploads/2026/04/Sean-Whalen.jpg",
+      "mediaMetadataUrl": "https://www.gyroscopereview.com/wp-json/wp/v2/media/6036",
+      "pixelDimensions": {
+        "width": 378,
+        "height": 504
+      },
+      "fileSizeBytes": 59558,
+      "visualNotes": "The cat fills much of the foreground and partly obscures Sean. The image is suitable as a personal About-page reference but is too small and compositionally weak for a main website hero.",
+      "identityConfidence": "confirmed",
+      "whyMatched": "The image is embedded in a named first-person profile whose bio contains the full Pilot Mound identity fingerprint.",
+      "photographer": null,
+      "license": null,
+      "rightsStatus": "unknown; visible online is not permission to reuse",
+      "storedLocally": false,
+      "recommendedAction": "If Sean likes this image, ask for its original file, photographer name, required credit, crop permission, and explicit web/social usage permission."
+    },
+    {
+      "id": "hooded-outdoor-contributor-portrait-2023",
+      "description": "Small outdoor portrait shown beside Sean's identity-rich contributor biography. The same apparent source photo is repeated in Founder's Favourites 22 and Halcyon Days 29.",
+      "sourcePages": [
+        "https://foundersfavourites.blogspot.com/p/2023.html",
+        "https://halcyondaysmagazine.blogspot.com/p/2023.html"
+      ],
+      "sourceAssets": [
+        {
+          "publication": "Founder's Favourites 22",
+          "location": "bottom-left contributor block on the p. 12–13 spread",
+          "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9sMvoO0mbq8Wuk77X7IwWU0tLiPEyenWjuk_vCG2KRuW45xeZLnrG52peGvxBxCfe2tZw-ydUoCRT-haSGToqCA_-nkKGUUVwWusnkVH45BXOX5_BLiSCHrhwcHmms5OvjEletDuscPXp9Y85F_DID2rMBi0QqJZJnqEpcAZpopLQfNcUOU7wZrgo2A/s2000/FF22%20p12,13.jpg"
+        },
+        {
+          "publication": "Halcyon Days 29",
+          "location": "Sean Whalen row on the contributor-bios page",
+          "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiD33mOykV6siWBaso8oe2sniBv0Z1exNv96C2_xkIVeJUnp5Pfhb7iMXhEhtmGAlvPxlmPiDbAye9sX1LbIzgtt-oXg7XQty8zU6mF7E1z70meFHt2lXBvihD56T7jbp713Lku0Omlp14V324DbpjU_YrRjOJkxRxI_V39BN7orY5zw4X1AEPNkgneA/s2000/HD%2029%20p14,15.jpg"
+        }
+      ],
+      "identityConfidence": "confirmed",
+      "whyMatched": "Both placements pair the portrait with a uniquely matching Iowa, Iowa State, health-and-safety, and publication-history biography.",
+      "photographer": null,
+      "license": null,
+      "rightsStatus": "unknown; the page scans also contain copyrighted poems and third-party design assets",
+      "storedLocally": false,
+      "recommendedAction": "Request the uncropped original from Sean instead of extracting the low-resolution image from a magazine scan."
+    }
+  ],
+  "reviewedButNotUsable": [
+    {
+      "source": "Pilot Mound municipal and fire-department pages",
+      "reason": "Group photographs are not captioned at the person level, so Sean cannot be identified safely from them. They also lack an explicit reuse license."
+    },
+    {
+      "source": "Search results for other people named Sean Whalen",
+      "reason": "Actor, entrepreneur, scientist, artist, clinician, musician, and other same-name portraits fail the Pilot Mound identity test."
+    }
+  ],
+  "commissioningChecklist": [
+    "current author headshot in vertical and horizontal crops",
+    "full-resolution original rather than a social-media or publication scrape",
+    "photographer name and exact credit line",
+    "written permission for website, social sharing cards, press use, cropping, and responsive resizing",
+    "Sean-approved alt text",
+    "optional permission-cleared environmental portrait near home or a public rural Boone County location",
+    "optional detail images of maps, land, weather, field textures, or fire-service objects without private-location disclosure"
+  ]
+}

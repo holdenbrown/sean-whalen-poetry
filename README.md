@@ -3,6 +3,8 @@
 The source for Sean Whalen's official poetry portfolio and verified publication index.
 The site is a statically exported Next.js application built for GitHub Pages.
 
+Live phone-review site: https://sean-whalen-poetry.nukebom27.chatgpt.site
+
 ## Local development
 
 Requirements: Node.js 24.x LTS and pnpm 11.x.
@@ -29,6 +31,9 @@ Open `http://localhost:3000`.
 Pushes to `main` run `.github/workflows/pages.yml`. The workflow derives the GitHub Pages
 repository subpath, builds the static export, runs every quality gate, and deploys the
 verified artifact. GitHub Pages must use **GitHub Actions** as its source.
+
+Until a GitHub repository is connected, the live review build is published through Sites
+at the URL above. Vercel is not used.
 
 For a custom domain, set the repository variable `SITE_URL` to the canonical origin and
 set `BASE_PATH` to `/` when the site is hosted at the origin root.

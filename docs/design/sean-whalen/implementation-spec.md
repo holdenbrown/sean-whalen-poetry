@@ -1,6 +1,11 @@
 # Sean Whalen implementation specification
 
-Status: accepted implementation reference for this build, 2026-08-02.
+Status: accepted implementation reference for this build, refined from user review on
+2026-08-03.
+
+The 2026-08-03 review intentionally supersedes three details in the original screenshots:
+the duplicate header CTA is removed, the archive headline uses an evergreen “present”
+range, and the mobile hero places its landscape between the introduction and actions.
 
 ## Concept references
 
@@ -34,7 +39,6 @@ specific location.
 - Home
 - Work
 - About
-- Read the work
 - Poems attentive to land, labor, memory, and the precise strangeness of rural life.
 - Read selected work
 - About Sean
@@ -50,7 +54,9 @@ No eyebrow, badge, proof chip, statistic, extra subtitle, or new claim may be ad
 - Large two-line name, supporting line, two actions, factual location line.
 - Desktop media occupies the right half and blends into the cream content edge with a
   cream edge fade only; there is no tint or overlay over the image.
-- Mobile stacks copy, actions, factual line, and a wide uncropped media frame.
+- Mobile stacks the name and introduction, a wide intrinsic-ratio media frame, then the
+  actions and factual line. The artwork is part of the hero composition rather than a
+  separate block after the actions.
 - Motion: the meridian draws in and content reveals gently; reduced motion disables both.
 
 ### Selected publications
@@ -82,7 +88,8 @@ No eyebrow, badge, proof chip, statistic, extra subtitle, or new claim may be ad
 
 ## Component and icon inventory
 
-- Shared site header with desktop navigation/action and native mobile `details` menu.
+- Shared site header with concise Home, Work, and About navigation plus a native mobile
+  `details` menu. The hero owns the reading action.
 - Shared site footer.
 - `FieldRail`: meridian, tick, and neutral section label.
 - `ArrowLink`: text plus a thin right-arrow SVG/Lucide arrow matching the concept.

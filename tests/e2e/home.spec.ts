@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test"
 test("the primary reading path works", async ({ page }) => {
   await page.goto("/")
 
-  await expect(page).toHaveTitle(/^Sean Whalen$/)
+  await expect(page).toHaveTitle(/^Sean Whalen — Iowa Poet$/)
   await expect(
     page.getByRole("heading", {
       level: 1,
@@ -43,14 +43,20 @@ test("the work index exposes every verified publication and the thesis archive",
 }) => {
   await page.goto("/work/")
 
-  await expect(page).toHaveTitle(/^Work \| Sean Whalen$/)
+  await expect(page).toHaveTitle(/^Poems & Publications by Sean Whalen$/)
   await expect(page.getByRole("heading", { level: 1, name: "Work" })).toBeVisible()
   await expect(
     page.getByRole("heading", { level: 2, name: "Small ecologies" })
   ).toBeVisible()
+
+  const publicationSummary = page.getByText(/^\d+ publication records ·/)
+  const publicationSummaryText = await publicationSummary.innerText()
+  const expectedPublicationCount = Number(publicationSummaryText.match(/^\d+/)?.[0])
+
+  expect(expectedPublicationCount).toBeGreaterThan(0)
   await expect(
     page.locator("#published-work-index").locator('a[target="_blank"]')
-  ).toHaveCount(42)
+  ).toHaveCount(expectedPublicationCount)
   await expect(
     page.getByRole("link", { name: /Institutional record/ })
   ).toHaveAttribute("href", "https://dr.lib.iastate.edu/handle/20.500.12876/69962")
@@ -59,7 +65,7 @@ test("the work index exposes every verified publication and the thesis archive",
 test("the about page presents the verified biography", async ({ page }) => {
   await page.goto("/about/")
 
-  await expect(page).toHaveTitle(/^About \| Sean Whalen$/)
+  await expect(page).toHaveTitle(/^About Sean Whalen, Iowa Poet$/)
   await expect(page.getByRole("heading", { level: 1, name: "About" })).toBeVisible()
   await expect(
     page.getByText("M.A., Creative Writing · Iowa State University")
@@ -83,7 +89,7 @@ test("mobile navigation exposes every shared link", async ({ page }, testInfo) =
 
   const mobileNavigation = page.locator("details")
 
-  for (const label of ["Home", "Work", "About", "Read the work"]) {
+  for (const label of ["Home", "Work", "About"]) {
     await expect(
       mobileNavigation.getByRole("link", { name: label, exact: true })
     ).toBeVisible()

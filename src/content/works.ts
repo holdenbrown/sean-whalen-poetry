@@ -1,3 +1,5 @@
+import workAdditionsJson from "./works.additions.json"
+
 export type WorkAccess = "online" | "pdf" | "record" | "scan"
 
 export type WorkActionLabel =
@@ -14,7 +16,13 @@ export type Work = Readonly<{
   href: string
   access: WorkAccess
   actionLabel: WorkActionLabel
+  thesisOverlap: boolean
 }>
+
+type BaseWork = Omit<Work, "thesisOverlap"> &
+  Readonly<{
+    thesisOverlap?: boolean
+  }>
 
 export type WorksYearGroup = Readonly<{
   year: number
@@ -36,7 +44,7 @@ export type ThesisArchive = Readonly<{
   doiHref: string
 }>
 
-export const thesisArchive = {
+const thesisArchiveSource = {
   id: "small-ecologies",
   title: "Small ecologies",
   author: "Sean Brian Whalen",
@@ -45,13 +53,11 @@ export const thesisArchive = {
   degree: "M.A. in English (Creative Writing)",
   type: "M.A. thesis",
   poemCount: 46,
-  exactTitleAdditions: 40,
-  uniqueWorksOverall: 82,
   repositoryHref: "https://dr.lib.iastate.edu/handle/20.500.12876/69962",
   doiHref: "https://doi.org/10.31274/rtd-180813-6997",
-} as const satisfies ThesisArchive
+} as const
 
-export const works = [
+const baseWorks = [
   {
     id: "iowa-perspective",
     title: "Iowa Perspective",
@@ -292,6 +298,7 @@ export const works = [
   {
     id: "the-disinfectant-girl",
     title: "The Disinfectant Girl",
+    thesisOverlap: true,
     year: 2024,
     dateDisplay: "Fall 2024",
     venue: "Thimble Literary Magazine",
@@ -470,6 +477,7 @@ export const works = [
   {
     id: "departure-arrival",
     title: "Departure, Arrival",
+    thesisOverlap: true,
     year: 2004,
     dateDisplay: "Spring 2004",
     venue: "Mid-American Review",
@@ -481,6 +489,7 @@ export const works = [
   {
     id: "crow-at-dawn",
     title: "Crow at Dawn",
+    thesisOverlap: true,
     year: 2002,
     dateDisplay: "Autumn 2002",
     venue: "The Midwest Quarterly",
@@ -503,6 +512,7 @@ export const works = [
   {
     id: "crow-in-love",
     title: "Crow in Love",
+    thesisOverlap: true,
     year: 2001,
     dateDisplay: "Fall 2001",
     venue: "Flyway",
@@ -514,6 +524,7 @@ export const works = [
   {
     id: "failed",
     title: "Failed",
+    thesisOverlap: true,
     year: 1999,
     dateDisplay: "Fall/Winter 1999–2000",
     venue: "Flyway",
@@ -525,6 +536,7 @@ export const works = [
   {
     id: "chicken-time",
     title: "Chicken Time",
+    thesisOverlap: true,
     year: 1997,
     dateDisplay: "Winter 1997",
     venue: "Flyway",
@@ -533,14 +545,259 @@ export const works = [
     access: "record",
     actionLabel: "View publication record",
   },
-] as const satisfies readonly Work[]
+] as const satisfies readonly BaseWork[]
 
-const workYears = [2026, 2025, 2024, 2023, 2004, 2002, 2001, 1999, 1997] as const
+export const workActionLabels = {
+  online: "Read online",
+  pdf: "Open issue PDF",
+  scan: "Open issue scan",
+  record: "View publication record",
+} as const satisfies Record<WorkAccess, WorkActionLabel>
+
+const workFields = new Set([
+  "id",
+  "title",
+  "year",
+  "dateDisplay",
+  "venue",
+  "issue",
+  "page",
+  "href",
+  "access",
+  "actionLabel",
+  "thesisOverlap",
+])
+const workIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const titleCollator = new Intl.Collator("en", {
+  numeric: true,
+  sensitivity: "base",
+})
+
+export function normalizeWorkTitle(title: string) {
+  return title.normalize("NFKC").trim().replace(/\s+/g, " ").toLocaleLowerCase("en-US")
+}
+
+export function validateWorkRecords(
+  value: unknown,
+  existingWorks: readonly Work[] = []
+): readonly Work[] {
+  if (!Array.isArray(value)) {
+    throw new TypeError("Work records must be an array")
+  }
+
+  const knownIds = new Set(existingWorks.map((work) => work.id))
+  const knownTitles = new Set(
+    existingWorks.map((work) => normalizeWorkTitle(work.title))
+  )
+  const currentYear = new Date().getUTCFullYear()
+
+  return value.map((candidate, index) => {
+    const location = `Work record ${index + 1}`
+
+    if (!isRecord(candidate)) {
+      throw new TypeError(`${location} must be an object`)
+    }
+
+    const unexpectedFields = Object.keys(candidate).filter(
+      (field) => !workFields.has(field)
+    )
+
+    if (unexpectedFields.length > 0) {
+      throw new TypeError(
+        `${location} has unexpected field${unexpectedFields.length === 1 ? "" : "s"}: ${unexpectedFields.join(", ")}`
+      )
+    }
+
+    const id = readRequiredString(candidate.id, `${location} id`, 100)
+    const title = readRequiredString(candidate.title, `${location} title`, 200)
+    const dateDisplay = readRequiredString(
+      candidate.dateDisplay,
+      `${location} dateDisplay`,
+      80
+    )
+    const venue = readRequiredString(candidate.venue, `${location} venue`, 160)
+    const issue = readOptionalString(candidate.issue, `${location} issue`, 120)
+    const href = readRequiredString(candidate.href, `${location} href`, 2048)
+
+    if (!workIdPattern.test(id)) {
+      throw new TypeError(`${location} id must be a lowercase kebab-case slug`)
+    }
+
+    if (
+      typeof candidate.year !== "number" ||
+      !Number.isInteger(candidate.year) ||
+      candidate.year < 1900 ||
+      candidate.year > currentYear
+    ) {
+      throw new TypeError(`${location} year must be between 1900 and ${currentYear}`)
+    }
+
+    if (!dateDisplay.includes(String(candidate.year))) {
+      throw new TypeError(`${location} dateDisplay must contain its year`)
+    }
+
+    let page: number | undefined
+
+    if (candidate.page !== undefined) {
+      if (
+        typeof candidate.page !== "number" ||
+        !Number.isInteger(candidate.page) ||
+        candidate.page < 1 ||
+        candidate.page > 10_000
+      ) {
+        throw new TypeError(`${location} page must be a positive integer`)
+      }
+
+      page = candidate.page
+    }
+
+    let url: URL
+
+    try {
+      url = new URL(href)
+    } catch {
+      throw new TypeError(`${location} href must be a valid URL`)
+    }
+
+    if (url.protocol !== "https:" || url.username || url.password) {
+      throw new TypeError(
+        `${location} href must use HTTPS and must not contain credentials`
+      )
+    }
+
+    if (
+      typeof candidate.access !== "string" ||
+      !(candidate.access in workActionLabels)
+    ) {
+      throw new TypeError(`${location} access is not supported`)
+    }
+
+    const access = candidate.access as WorkAccess
+    const actionLabel = readRequiredString(
+      candidate.actionLabel,
+      `${location} actionLabel`,
+      80
+    )
+
+    if (actionLabel !== workActionLabels[access]) {
+      throw new TypeError(`${location} actionLabel does not match its access type`)
+    }
+
+    if (typeof candidate.thesisOverlap !== "boolean") {
+      throw new TypeError(`${location} thesisOverlap must be a boolean`)
+    }
+
+    if (knownIds.has(id)) {
+      throw new TypeError(`Duplicate work id: ${id}`)
+    }
+
+    const normalizedTitle = normalizeWorkTitle(title)
+
+    if (knownTitles.has(normalizedTitle)) {
+      throw new TypeError(`Duplicate work title: ${title}`)
+    }
+
+    knownIds.add(id)
+    knownTitles.add(normalizedTitle)
+
+    return {
+      id,
+      title,
+      year: candidate.year,
+      dateDisplay,
+      venue,
+      ...(issue ? { issue } : {}),
+      ...(page ? { page } : {}),
+      href,
+      access,
+      actionLabel,
+      thesisOverlap: candidate.thesisOverlap,
+    }
+  })
+}
+
+const validatedBaseWorks = validateWorkRecords(
+  baseWorks.map((work) => ({
+    ...work,
+    thesisOverlap: "thesisOverlap" in work ? work.thesisOverlap : false,
+  }))
+)
+const validatedAdditions = validateWorkRecords(workAdditionsJson, validatedBaseWorks)
+
+export const works: readonly Work[] = [
+  ...validatedBaseWorks,
+  ...validatedAdditions,
+].sort(compareWorks)
+
+export const publicationCount = works.length
+export const workYears: readonly number[] = [...new Set(works.map((work) => work.year))]
+
+if (workYears.length === 0) {
+  throw new Error("At least one work record is required")
+}
+
+export const publicationYears = {
+  latest: workYears[0] as number,
+  earliest: workYears[workYears.length - 1] as number,
+} as const
 
 export const worksByYear: readonly WorksYearGroup[] = workYears.map((year) => ({
   year,
   works: works.filter((work) => work.year === year),
 }))
+
+export const thesisOverlapCount = works.filter((work) => work.thesisOverlap).length
+export const thesisOnlyCount = thesisArchiveSource.poemCount - thesisOverlapCount
+
+if (thesisOnlyCount < 0) {
+  throw new Error("Thesis overlap count exceeds the thesis poem count")
+}
+
+export const uniqueWorkCount = publicationCount + thesisOnlyCount
+
+export const thesisArchive = {
+  ...thesisArchiveSource,
+  exactTitleAdditions: thesisOnlyCount,
+  uniqueWorksOverall: uniqueWorkCount,
+} as const satisfies ThesisArchive
+
+function compareWorks(left: Work, right: Work) {
+  return (
+    right.year - left.year ||
+    titleCollator.compare(left.title, right.title) ||
+    left.id.localeCompare(right.id)
+  )
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+function readRequiredString(value: unknown, label: string, maximumLength: number) {
+  if (typeof value !== "string" || value.length === 0) {
+    throw new TypeError(`${label} must be a non-empty string`)
+  }
+
+  if (value !== value.trim()) {
+    throw new TypeError(`${label} must not have leading or trailing whitespace`)
+  }
+
+  if (/[\u0000-\u001f\u007f]/.test(value)) {
+    throw new TypeError(`${label} must not contain control characters`)
+  }
+
+  if (value.length > maximumLength) {
+    throw new TypeError(`${label} must be ${maximumLength} characters or fewer`)
+  }
+
+  return value
+}
+
+function readOptionalString(value: unknown, label: string, maximumLength: number) {
+  return value === undefined
+    ? undefined
+    : readRequiredString(value, label, maximumLength)
+}
 
 export const selectedWorkIds = [
   "iowa-perspective",
@@ -564,10 +821,8 @@ export const selectedWorks: readonly Work[] = selectedWorkIds.map((id) => {
 export const workPageContent = {
   railLabel: "INDEX / 01",
   title: "Work",
-  summary: "42 publication records · 82 verified works overall · 1997–2026",
-  description:
-    "A source-linked index of 42 separately published poems and the 46-poem thesis Small ecologies, representing 82 unique verified works.",
+  summary: `${publicationCount} publication records · ${uniqueWorkCount} verified works overall · Latest publication ${publicationYears.latest}`,
+  description: `A source-linked index of ${publicationCount} separately published poems and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
   note: "This index is not presented as a complete private bibliography.",
-  updateNote:
-    "Records were last reviewed in August 2026. New work is added only after its title and publication source can be verified.",
+  updateNote: `The newest verified record is dated ${publicationYears.latest}. New work is added only after its title and publication source can be verified.`,
 } as const

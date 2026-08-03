@@ -33,13 +33,6 @@ export function MobileNavigation() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href={siteConfig.primaryAction.href}
-            onClick={closeNavigation}
-            className="mt-1 flex min-h-11 items-center border-t border-border px-3 pt-2 text-sm font-medium text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            {siteConfig.primaryAction.label}
-          </Link>
         </div>
       </div>
     </details>

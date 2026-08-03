@@ -1,0 +1,176 @@
+name: Add publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Exact poem title, including punctuation
+        required: true
+        type: string
+      venue:
+        description: Publication or journal name
+        required: true
+        type: string
+      year:
+        description: Four-digit publication year
+        required: true
+        type: string
+      date_display:
+        description: Display date, for example Spring 2026
+        required: true
+        type: string
+      issue:
+        description: Issue or edition, if available
+        required: false
+        type: string
+      page:
+        description: Positive page number, if available
+        required: false
+        type: string
+      href:
+        description: Prefer a poem page, then PDF, scan, or publication record
+        required: true
+        type: string
+      access:
+        description: Kind of source linked above
+        required: true
+        default: online
+        type: choice
+        options:
+          - online
+          - pdf
+          - scan
+          - record
+      thesis_overlap:
+        description: This poem also appears in the 2004 thesis Small ecologies
+        required: true
+        default: false
+        type: boolean
+      confirmed:
+        description: The publication is verified and no poem text or third-party asset is included
+        required: true
+        default: false
+        type: boolean
+      dry_run:
+        description: Validate only; do not commit or deploy
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: publication-update
+  cancel-in-progress: false
+
+jobs:
+  add-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Require the main branch
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "Run this workflow from the main branch."
+            exit 1
+          fi
+
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Validate and stage the publication record
+        id: publication
+        env:
+          PUBLICATION_ACCESS: ${{ inputs.access }}
+          PUBLICATION_CONFIRMED: ${{ inputs.confirmed }}
+          PUBLICATION_DATE_DISPLAY: ${{ inputs.date_display }}
+          PUBLICATION_DRY_RUN: ${{ inputs.dry_run }}
+          PUBLICATION_HREF: ${{ inputs.href }}
+          PUBLICATION_ISSUE: ${{ inputs.issue }}
+          PUBLICATION_PAGE: ${{ inputs.page }}
+          PUBLICATION_THESIS_OVERLAP: ${{ inputs.thesis_overlap }}
+          PUBLICATION_TITLE: ${{ inputs.title }}
+          PUBLICATION_VENUE: ${{ inputs.venue }}
+          PUBLICATION_YEAR: ${{ inputs.year }}
+        run: node scripts/add-publication.mjs
+
+      - name: Install dependencies
+        if: ${{ inputs.dry_run == false }}
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        if: ${{ inputs.dry_run == false }}
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run complete verification
+        if: ${{ inputs.dry_run == false }}
+        env:
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: http://127.0.0.1:4173
+        run: pnpm verify
+
+      - name: Confirm the update is isolated and current
+        if: ${{ inputs.dry_run == false }}
+        shell: bash
+        run: |
+          git fetch origin main
+
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+            echo "main changed during verification; rerun the publication workflow."
+            exit 1
+          fi
+
+          changed_files="$(git diff --name-only)"
+          untracked_files="$(git ls-files --others --exclude-standard)"
+
+          if [[ "$changed_files" != "src/content/works.additions.json" ]]; then
+            echo "Unexpected tracked changes:"
+            echo "$changed_files"
+            exit 1
+          fi
+
+          if [[ -n "$untracked_files" ]]; then
+            echo "Unexpected untracked files:"
+            echo "$untracked_files"
+            exit 1
+          fi
+
+      - name: Commit and push the publication
+        if: ${{ inputs.dry_run == false }}
+        env:
+          PUBLICATION_ID: ${{ steps.publication.outputs.id }}
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/content/works.additions.json
+          git commit -m "content: add publication ${PUBLICATION_ID}"
+          git push origin HEAD:main
+
+      - name: Dispatch the Pages deployment
+        if: ${{ inputs.dry_run == false }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
+
+      - name: Record dry-run result
+        if: ${{ inputs.dry_run }}
+        env:
+          PUBLICATION_ID: ${{ steps.publication.outputs.id }}
+        shell: bash
+        run: echo "Validated ${PUBLICATION_ID}; no file was changed or deployed." >> "$GITHUB_STEP_SUMMARY"

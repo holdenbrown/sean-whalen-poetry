@@ -3,19 +3,130 @@ import { ArrowUpRightIcon } from "lucide-react"
 import { FieldSection } from "@/components/editorial/field-section"
 import { PublicationRow } from "@/components/editorial/publication-row"
 import { ExternalLink } from "@/components/external-link"
-import { thesisArchive, workPageContent, worksByYear } from "@/content/works"
+import { StructuredData } from "@/components/structured-data"
+import { siteConfig } from "@/config/site"
+import {
+  publicationCount,
+  publicationYears,
+  thesisArchive,
+  thesisOverlapCount,
+  uniqueWorkCount,
+  workPageContent,
+  works,
+  worksByYear,
+} from "@/content/works"
+import { absoluteUrl } from "@/lib/deployment"
 import { createPageMetadata } from "@/lib/metadata"
 
 export const metadata = createPageMetadata({
-  title: "Work",
-  description:
-    "Explore Sean Whalen's source-linked publication index and his 46-poem 2004 thesis, Small ecologies.",
+  title: "Poems & Publications by Sean Whalen",
+  description: `Explore ${publicationCount} verified publication records and Sean Whalen's ${thesisArchive.poemCount}-poem 2004 Iowa State thesis, Small ecologies—${uniqueWorkCount} unique works, with publications from ${publicationYears.earliest} through ${publicationYears.latest}.`,
   path: "/work",
+  absoluteTitle: true,
 })
+
+const workUrl = absoluteUrl("/work", siteConfig.url)
+const websiteId = absoluteUrl("/#website", siteConfig.url)
+const personId = absoluteUrl("/#sean-whalen", siteConfig.url)
+const publicationIndexId = workUrl + "#publication-index"
+const thesisId = thesisArchive.doiHref
+
+const workSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": workUrl + "#collection",
+      url: workUrl,
+      name: "Poems & Publications by Sean Whalen",
+      description: `A source-linked index of ${publicationCount} publication records and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
+      inLanguage: siteConfig.language,
+      isPartOf: {
+        "@id": websiteId,
+      },
+      about: {
+        "@id": personId,
+      },
+      mainEntity: {
+        "@id": publicationIndexId,
+      },
+      hasPart: [
+        {
+          "@id": publicationIndexId,
+        },
+        {
+          "@id": thesisId,
+        },
+      ],
+    },
+    {
+      "@type": "ItemList",
+      "@id": publicationIndexId,
+      name: "Sean Whalen publication records",
+      numberOfItems: works.length,
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      itemListElement: works.map((work, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          "@id": workUrl + "#" + work.id,
+          name: work.title,
+          url: work.href,
+          datePublished: String(work.year),
+          genre: "Poetry",
+          inLanguage: siteConfig.language,
+          author: {
+            "@id": personId,
+          },
+          isPartOf: {
+            "@type": "CreativeWork",
+            name: [work.venue, work.issue].filter(Boolean).join(" · "),
+          },
+          publisher: {
+            "@type": "Organization",
+            name: work.venue,
+          },
+          ...(work.page ? { pagination: String(work.page) } : {}),
+          creativeWorkStatus: "Published",
+        },
+      })),
+    },
+    {
+      "@type": "Thesis",
+      "@id": thesisId,
+      name: thesisArchive.title,
+      url: thesisArchive.repositoryHref,
+      author: {
+        "@id": personId,
+      },
+      datePublished: String(thesisArchive.year),
+      inLanguage: siteConfig.language,
+      genre: ["Poetry", thesisArchive.type],
+      description: `${thesisArchive.author}'s ${thesisArchive.poemCount}-poem M.A. thesis, including ${thesisArchive.exactTitleAdditions} exact-title additions to the verified work index.`,
+      inSupportOf: thesisArchive.degree,
+      publisher: {
+        "@type": "CollegeOrUniversity",
+        name: thesisArchive.institution,
+      },
+      identifier: {
+        "@type": "PropertyValue",
+        propertyID: "DOI",
+        value: "10.31274/rtd-180813-6997",
+        url: thesisArchive.doiHref,
+      },
+      copyrightHolder: {
+        "@id": personId,
+      },
+      copyrightYear: thesisArchive.year,
+    },
+  ],
+}
 
 export default function WorkPage() {
   return (
     <div className="site-frame">
+      <StructuredData data={workSchema} />
       <FieldSection
         railLabel={workPageContent.railLabel}
         aria-labelledby="work-title"
@@ -59,8 +170,9 @@ export default function WorkPage() {
               weather, work, and memory.
             </p>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-primary-foreground/90">
-              Forty exact-title additions extend beyond the publication records below;
-              six titles overlap. Together, the verified sources account for{" "}
+              {thesisArchive.exactTitleAdditions} exact-title additions extend beyond
+              the publication records below; {thesisOverlapCount} titles overlap.
+              Together, the verified sources account for{" "}
               {thesisArchive.uniqueWorksOverall} unique works.
             </p>
           </header>

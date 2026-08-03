@@ -6,21 +6,106 @@ import { ContourLines } from "@/components/editorial/contour-lines"
 import { FactList } from "@/components/editorial/fact-list"
 import { FieldSection } from "@/components/editorial/field-section"
 import { ExternalLink } from "@/components/external-link"
+import { StructuredData } from "@/components/structured-data"
 import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
 import { aboutContent } from "@/content/about"
-import { withBasePath } from "@/lib/deployment"
+import { absoluteUrl, withBasePath } from "@/lib/deployment"
 import { createPageMetadata } from "@/lib/metadata"
 
 export const metadata = createPageMetadata({
-  title: "About",
+  title: "About Sean Whalen, Iowa Poet",
   description:
-    "Learn about Iowa poet Sean Whalen, his return to writing, and the places and practical vocabularies that shape his work.",
+    "Biography of Sean Whalen, an Iowa poet near Pilot Mound whose work spans ecology, memory, labor, history, and the uncanny.",
   path: "/about",
+  absoluteTitle: true,
 })
+
+const aboutUrl = absoluteUrl("/about", siteConfig.url)
+const websiteId = absoluteUrl("/#website", siteConfig.url)
+const personId = absoluteUrl("/#sean-whalen", siteConfig.url)
+const portraitId = aboutUrl + "#portrait"
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": aboutUrl + "#profile",
+      url: aboutUrl,
+      name: "About Sean Whalen, Iowa Poet",
+      description:
+        "Biography of Sean Whalen, an Iowa poet near Pilot Mound whose work spans ecology, memory, labor, history, and the uncanny.",
+      inLanguage: siteConfig.language,
+      isPartOf: {
+        "@id": websiteId,
+      },
+      mainEntity: {
+        "@id": personId,
+      },
+      primaryImageOfPage: {
+        "@id": portraitId,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: siteConfig.name,
+      url: aboutUrl,
+      jobTitle: "Poet",
+      description:
+        "Iowa poet from rural Boone County near Pilot Mound, retired health-and-safety professional, and volunteer fire chief.",
+      image: {
+        "@id": portraitId,
+      },
+      homeLocation: {
+        "@type": "Place",
+        name: "Near Pilot Mound in rural Boone County, Iowa",
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Iowa State University",
+      },
+      subjectOf: [
+        {
+          "@type": "ProfilePage",
+          name: "Sean Whalen at Stone Poetry Quarterly",
+          url: "https://stonepoetryjournal.com/sean-whalen/",
+        },
+        {
+          "@type": "ProfilePage",
+          name: "Poet Pick: Sean Whalen",
+          url: "https://www.gyroscopereview.com/2026/04/poet-pick-sean-whalen/",
+        },
+        {
+          "@type": "ProfilePage",
+          name: "Sean Whalen at Thimble Literary Magazine",
+          url: "https://www.thimblelitmag.com/author/swhalen/",
+        },
+      ],
+    },
+    {
+      "@type": "ImageObject",
+      "@id": portraitId,
+      contentUrl: absoluteUrl(aboutContent.portrait.src, siteConfig.url),
+      width: 1638,
+      height: 2048,
+      caption: aboutContent.portrait.alt,
+      creator: {
+        "@type": "Person",
+        name: "Stacy McDonald",
+        url: aboutContent.portrait.creditHref,
+      },
+      creditText: aboutContent.portrait.credit,
+      copyrightNotice: "Stacy McDonald - The Photician",
+    },
+  ],
+}
 
 export default function AboutPage() {
   return (
     <div className="site-frame overflow-hidden">
+      <StructuredData data={aboutSchema} />
       <FieldSection
         railLabel={aboutContent.railLabel}
         aria-labelledby="about-title"

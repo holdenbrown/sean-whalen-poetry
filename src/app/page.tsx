@@ -14,7 +14,7 @@ import { withBasePath } from "@/lib/deployment"
 import { createPageMetadata } from "@/lib/metadata"
 
 export const metadata = createPageMetadata({
-  title: siteConfig.name,
+  title: `${siteConfig.name} — Iowa Poet`,
   description: siteConfig.description,
   path: "/",
   absoluteTitle: true,
@@ -36,7 +36,23 @@ export default function HomePage() {
           <p className="mt-8 max-w-2xl text-xl leading-relaxed">
             {homeContent.hero.description}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        </div>
+
+        <div className="hero-media">
+          <Image
+            src={withBasePath(homeContent.hero.artwork.src)}
+            alt={homeContent.hero.artwork.alt}
+            width={1586}
+            height={992}
+            sizes="(min-width: 768px) 55vw, 100vw"
+            loading="eager"
+            fetchPriority="high"
+            className="hero-artwork"
+          />
+        </div>
+
+        <div className="hero-actions reveal-up">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" variant="cta" className="rounded-none">
               <Link href={homeContent.hero.primaryAction.href}>
                 {homeContent.hero.primaryAction.label}
@@ -51,19 +67,6 @@ export default function HomePage() {
           <p className="mt-10 font-mono text-sm text-muted-foreground">
             {homeContent.hero.identity}
           </p>
-        </div>
-
-        <div className="hero-media">
-          <Image
-            src={withBasePath(homeContent.hero.artwork.src)}
-            alt={homeContent.hero.artwork.alt}
-            width={1586}
-            height={992}
-            sizes="(min-width: 768px) 55vw, 100vw"
-            loading="eager"
-            fetchPriority="high"
-            className="hero-artwork"
-          />
         </div>
       </FieldSection>
 

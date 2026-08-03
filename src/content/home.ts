@@ -1,3 +1,5 @@
+import { publicationYears, uniqueWorkCount } from "@/content/works"
+
 export const homeContent = {
   hero: {
     railLabel: "LINE / 01",
@@ -40,7 +42,7 @@ export const homeContent = {
       "crow-at-dawn",
     ],
     action: {
-      label: "View all 82 verified works",
+      label: `View all ${uniqueWorkCount} verified works`,
       href: "/work",
     },
   },
@@ -76,9 +78,8 @@ export const homeContent = {
   },
   archive: {
     railLabel: "INDEX / 05",
-    title: "Work, 1997–2026",
-    description:
-      "Explore 82 source-linked works across journal publications and the 2004 thesis Small ecologies.",
+    title: `Work, ${publicationYears.earliest}–present`,
+    description: `Explore ${uniqueWorkCount} source-linked works across journal publications and the 2004 thesis Small ecologies.`,
     action: {
       label: "Explore the full index",
       href: "/work",

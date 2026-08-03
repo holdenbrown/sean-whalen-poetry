@@ -9,6 +9,9 @@ content or visual identity of any previous site.
 - docs/website-brief.md records purpose, audience, scope, facts, constraints, and approval.
 - src/config/site.ts owns shared identity, navigation, canonical origin, and global labels.
 - src/content owns page-specific copy and structured content.
+- src/content/works.additions.json owns publication records accepted through the trusted
+  GitHub Actions update form; src/content/works.ts validates, merges, sorts, and derives
+  display metadata and counts from those records.
 - src/app/globals.css owns semantic design tokens and the global style contract.
 - src/components/ui owns source-controlled UI primitives.
 - src/components/layout owns shared page composition.
@@ -76,6 +79,9 @@ Gate: pnpm verify passes and human review finds no unexplained deviation.
 ### 6. Deploy and maintain
 
 - Deploy the exact reviewed source state through CI.
+- Add verified publications through the write-authorized `Add publication` workflow
+  documented in docs/publication-updates.md. Its dry-run mode validates without writing;
+  a real run commits only the additions JSON and explicitly dispatches the Pages build.
 - Keep canonicals and path prefixes environment-aware.
 - Update documentation and tests with token, content-schema, route, or deployment changes.
 - Use small pull requests with explicit outcome, evidence, and accessibility impact.

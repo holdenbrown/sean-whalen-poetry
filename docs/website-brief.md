@@ -39,8 +39,10 @@
 - Testimonials or proof with permission: No testimonials. Publication venues and linked
   work records provide the proof.
 - Content owner and update process: Sean owns and approves public-facing biography and
-  work selections. New records must pass the identity and rights rules documented in the
-  research packet before being added to `src/content`.
+  work selections. An authorized repository collaborator can add a verified publication
+  through the guided GitHub Actions workflow; validation, grouping, counts, and the Pages
+  rebuild are automated. New records must still pass the identity and rights rules in the
+  research packet.
 
 ## Visual direction
 
@@ -67,8 +69,9 @@
 - Forms and their real submission destination: No forms.
 - Search, filtering, or interactive tools: No application state is required. Publication
   links disclose new-tab behavior in accessible text.
-- CMS or content source: Typed local content in `src/content`, derived from the verified
-  research packet.
+- CMS or content source: Typed local content in `src/content`, with new publication records
+  accepted through a validated GitHub-native workflow. No runtime CMS or second hosting
+  platform is required.
 - Analytics and consent requirements: No analytics or cookies in this scope.
 - External services: Outbound links to original journals and issue PDFs only.
 

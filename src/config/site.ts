@@ -13,10 +13,6 @@ export const siteConfig = {
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
   ],
-  primaryAction: {
-    label: "Read the work",
-    href: "/work",
-  },
 } as const
 
 export type SiteConfig = typeof siteConfig

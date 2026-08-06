@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  bibliographyCount,
+  forthcomingCount,
   normalizeWorkTitle,
   publicationCount,
   publicationYears,
+  publishedCount,
   selectedWorks,
   thesisArchive,
   thesisOnlyCount,
   thesisOverlapCount,
   uniqueWorkCount,
+  unpublishedCount,
   validateWorkRecords,
   workActionLabels,
   works,
@@ -27,8 +31,12 @@ const knownThesisOverlaps = [
 
 describe("Sean Whalen work records", () => {
   it("keeps every publication identity unique", () => {
-    expect(publicationCount).toBe(works.length)
-    expect(publicationCount).toBeGreaterThanOrEqual(42)
+    expect(bibliographyCount).toBe(works.length)
+    expect(bibliographyCount).toBe(76)
+    expect(publicationCount).toBe(75)
+    expect(publishedCount).toBe(72)
+    expect(forthcomingCount).toBe(3)
+    expect(unpublishedCount).toBe(1)
     expect(new Set(works.map((work) => work.id)).size).toBe(works.length)
     expect(new Set(works.map((work) => normalizeWorkTitle(work.title))).size).toBe(
       works.length
@@ -43,7 +51,8 @@ describe("Sean Whalen work records", () => {
     expect(thesisArchive.poemCount).toBe(46)
     expect(thesisOverlapCount).toBeGreaterThanOrEqual(knownThesisOverlaps.length)
     expect(thesisOnlyCount).toBe(thesisArchive.poemCount - thesisOverlapCount)
-    expect(uniqueWorkCount).toBe(publicationCount + thesisOnlyCount)
+    expect(uniqueWorkCount).toBe(bibliographyCount + thesisOnlyCount)
+    expect(uniqueWorkCount).toBe(103)
     expect(thesisArchive.exactTitleAdditions).toBe(thesisOnlyCount)
     expect(thesisArchive.uniqueWorksOverall).toBe(uniqueWorkCount)
     expect(new URL(thesisArchive.repositoryHref).protocol).toBe("https:")
@@ -52,9 +61,25 @@ describe("Sean Whalen work records", () => {
 
   it("keeps every source secure and every action label derived from access", () => {
     for (const work of works) {
-      expect(new URL(work.href).protocol).toBe("https:")
+      if (work.href) {
+        expect(new URL(work.href).protocol).toBe("https:")
+      } else {
+        expect(work.access).toBe("print")
+      }
       expect(work.actionLabel).toBe(workActionLabels[work.access])
     }
+  })
+
+  it("labels forthcoming and accepted-but-unpublished records honestly", () => {
+    expect(works.filter((work) => work.status === "forthcoming")).toHaveLength(3)
+    const twoFish = works.find((work) => work.id === "two-fish")
+
+    expect(twoFish).toMatchObject({
+      status: "accepted-unpublished",
+      access: "print",
+      thesisOverlap: true,
+    })
+    expect(twoFish?.href).toBeUndefined()
   })
 
   it("groups every work once in deterministic newest-first order", () => {

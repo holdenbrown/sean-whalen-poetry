@@ -101,7 +101,7 @@ for (const route of ["/", "/work/", "/about/"]) {
   })
 }
 
-test("the work index exposes every verified publication and the thesis archive", async ({
+test("the work index exposes every bibliography record and the thesis archive", async ({
   page,
 }) => {
   await page.goto("/work/")
@@ -112,14 +112,16 @@ test("the work index exposes every verified publication and the thesis archive",
     page.getByRole("heading", { level: 2, name: "Small ecologies" })
   ).toBeVisible()
 
-  const publicationSummary = page.getByText(/^\d+ publication records ·/)
+  const publicationSummary = page.getByText(/^\d+ bibliography records ·/)
   const publicationSummaryText = await publicationSummary.innerText()
-  const expectedPublicationCount = Number(publicationSummaryText.match(/^\d+/)?.[0])
+  const expectedBibliographyCount = Number(publicationSummaryText.match(/^\d+/)?.[0])
 
-  expect(expectedPublicationCount).toBeGreaterThan(0)
-  await expect(
-    page.locator("#published-work-index").locator('a[target="_blank"]')
-  ).toHaveCount(expectedPublicationCount)
+  expect(expectedBibliographyCount).toBe(76)
+  await expect(page.locator("#published-work-index").locator("li")).toHaveCount(
+    expectedBibliographyCount
+  )
+  await expect(page.getByText(/Forthcoming · Lyrical Iowa/)).toBeVisible()
+  await expect(page.getByText(/Accepted; unpublished · Lakeshore Review/)).toBeVisible()
   await expect(
     page.getByRole("link", { name: /Institutional record/ })
   ).toHaveAttribute("href", "https://dr.lib.iastate.edu/handle/20.500.12876/69962")

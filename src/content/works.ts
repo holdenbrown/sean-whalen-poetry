@@ -1,9 +1,15 @@
 import workAdditionsJson from "./works.additions.json"
 
-export type WorkAccess = "online" | "pdf" | "record" | "scan"
+export type WorkAccess = "online" | "pdf" | "record" | "scan" | "print"
+
+export type WorkStatus = "published" | "forthcoming" | "accepted-unpublished"
 
 export type WorkActionLabel =
-  "Read online" | "Open issue PDF" | "Open issue scan" | "View publication record"
+  | "Read online"
+  | "Open issue PDF"
+  | "Open issue scan"
+  | "View publication record"
+  | "Print record"
 
 export type Work = Readonly<{
   id: string
@@ -13,14 +19,16 @@ export type Work = Readonly<{
   venue: string
   issue?: string
   page?: number
-  href: string
+  href?: string
   access: WorkAccess
   actionLabel: WorkActionLabel
+  status: WorkStatus
   thesisOverlap: boolean
 }>
 
-type BaseWork = Omit<Work, "thesisOverlap"> &
+type BaseWork = Omit<Work, "status" | "thesisOverlap"> &
   Readonly<{
+    status?: WorkStatus
     thesisOverlap?: boolean
   }>
 
@@ -552,7 +560,14 @@ export const workActionLabels = {
   pdf: "Open issue PDF",
   scan: "Open issue scan",
   record: "View publication record",
+  print: "Print record",
 } as const satisfies Record<WorkAccess, WorkActionLabel>
+
+const workStatuses = new Set<WorkStatus>([
+  "published",
+  "forthcoming",
+  "accepted-unpublished",
+])
 
 const workFields = new Set([
   "id",
@@ -565,6 +580,7 @@ const workFields = new Set([
   "href",
   "access",
   "actionLabel",
+  "status",
   "thesisOverlap",
 ])
 const workIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -617,7 +633,7 @@ export function validateWorkRecords(
     )
     const venue = readRequiredString(candidate.venue, `${location} venue`, 160)
     const issue = readOptionalString(candidate.issue, `${location} issue`, 120)
-    const href = readRequiredString(candidate.href, `${location} href`, 2048)
+    const href = readOptionalString(candidate.href, `${location} href`, 2048)
 
     if (!workIdPattern.test(id)) {
       throw new TypeError(`${location} id must be a lowercase kebab-case slug`)
@@ -651,20 +667,6 @@ export function validateWorkRecords(
       page = candidate.page
     }
 
-    let url: URL
-
-    try {
-      url = new URL(href)
-    } catch {
-      throw new TypeError(`${location} href must be a valid URL`)
-    }
-
-    if (url.protocol !== "https:" || url.username || url.password) {
-      throw new TypeError(
-        `${location} href must use HTTPS and must not contain credentials`
-      )
-    }
-
     if (
       typeof candidate.access !== "string" ||
       !(candidate.access in workActionLabels)
@@ -673,6 +675,33 @@ export function validateWorkRecords(
     }
 
     const access = candidate.access as WorkAccess
+    const status = candidate.status === undefined ? "published" : candidate.status
+
+    if (typeof status !== "string" || !workStatuses.has(status as WorkStatus)) {
+      throw new TypeError(`${location} status is not supported`)
+    }
+
+    if (!href && access !== "print") {
+      throw new TypeError(
+        `${location} must provide an HTTPS source unless it is print-only`
+      )
+    }
+
+    if (href) {
+      let url: URL
+
+      try {
+        url = new URL(href)
+      } catch {
+        throw new TypeError(`${location} href must be a valid URL`)
+      }
+
+      if (url.protocol !== "https:" || url.username || url.password) {
+        throw new TypeError(
+          `${location} href must use HTTPS and must not contain credentials`
+        )
+      }
+    }
     const actionLabel = readRequiredString(
       candidate.actionLabel,
       `${location} actionLabel`,
@@ -708,9 +737,10 @@ export function validateWorkRecords(
       venue,
       ...(issue ? { issue } : {}),
       ...(page ? { page } : {}),
-      href,
+      ...(href ? { href } : {}),
       access,
       actionLabel,
+      status: status as WorkStatus,
       thesisOverlap: candidate.thesisOverlap,
     }
   })
@@ -719,6 +749,7 @@ export function validateWorkRecords(
 const validatedBaseWorks = validateWorkRecords(
   baseWorks.map((work) => ({
     ...work,
+    status: "status" in work ? work.status : "published",
     thesisOverlap: "thesisOverlap" in work ? work.thesisOverlap : false,
   }))
 )
@@ -729,7 +760,15 @@ export const works: readonly Work[] = [
   ...validatedAdditions,
 ].sort(compareWorks)
 
-export const publicationCount = works.length
+export const bibliographyCount = works.length
+export const unpublishedCount = works.filter(
+  (work) => work.status === "accepted-unpublished"
+).length
+export const forthcomingCount = works.filter(
+  (work) => work.status === "forthcoming"
+).length
+export const publicationCount = bibliographyCount - unpublishedCount
+export const publishedCount = publicationCount - forthcomingCount
 export const workYears: readonly number[] = [...new Set(works.map((work) => work.year))]
 
 if (workYears.length === 0) {
@@ -753,7 +792,7 @@ if (thesisOnlyCount < 0) {
   throw new Error("Thesis overlap count exceeds the thesis poem count")
 }
 
-export const uniqueWorkCount = publicationCount + thesisOnlyCount
+export const uniqueWorkCount = bibliographyCount + thesisOnlyCount
 
 export const thesisArchive = {
   ...thesisArchiveSource,
@@ -825,8 +864,8 @@ export const workPageContent = {
     index: "INDEX / 03",
   },
   title: "Work",
-  summary: `${publicationCount} publication records · ${uniqueWorkCount} verified works overall · Latest publication ${publicationYears.latest}`,
-  description: `A source-linked index of ${publicationCount} separately published poems and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
-  note: "This index is not presented as a complete private bibliography.",
-  updateNote: `The newest verified record is dated ${publicationYears.latest}. New work is added only after its title and publication source can be verified.`,
+  summary: `${bibliographyCount} bibliography records · ${publishedCount} published · ${forthcomingCount} forthcoming · ${uniqueWorkCount} verified works overall`,
+  description: `A documented index of ${publicationCount} published or forthcoming poems, one accepted-but-unpublished record, and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
+  note: "Print-only records come from Sean's August 3, 2026 publication list. Forthcoming and unpublished entries are labeled rather than presented as released work.",
+  updateNote: `Updated from Sean's publication list dated August 3, 2026. Links lead to poem, issue, or publisher records when a secure public source is available.`,
 } as const

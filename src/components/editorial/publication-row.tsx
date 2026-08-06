@@ -18,18 +18,18 @@ export function PublicationRow({
   actionLabel,
 }: PublicationRowProps) {
   const isCompact = variant === "compact"
-
-  return (
-    <ExternalLink
-      href={work.href}
-      className={cn(
-        "publication-row focus-editorial group transition-colors duration-150 ease-fluid hover:bg-secondary/45",
-        isCompact && "publication-row-compact"
-      )}
-    >
+  const rowClassName = cn(
+    "publication-row group",
+    work.href &&
+      "focus-editorial transition-colors duration-150 ease-fluid hover:bg-secondary/45",
+    isCompact && "publication-row-compact"
+  )
+  const content = (
+    <>
       <h3
         className={cn(
-          "font-heading text-balance transition-colors duration-150 group-hover:text-primary",
+          "font-heading text-balance",
+          work.href && "transition-colors duration-150 group-hover:text-primary",
           isCompact ? "text-2xl leading-tight sm:text-3xl" : "display-row"
         )}
       >
@@ -39,13 +39,25 @@ export function PublicationRow({
         {metadata ?? work.venue}
       </p>
       <span className="publication-row-action flex items-center justify-end gap-4 font-mono text-sm text-primary">
-        <span className="hidden lg:inline">{actionLabel ?? work.actionLabel}</span>
-        <ArrowRightIcon
-          aria-hidden="true"
-          className="size-5 text-signal transition-transform duration-150 ease-fluid group-hover:translate-x-1"
-          strokeWidth={1.5}
-        />
+        <span className={work.href ? "hidden lg:inline" : undefined}>
+          {actionLabel ?? work.actionLabel}
+        </span>
+        {work.href ? (
+          <ArrowRightIcon
+            aria-hidden="true"
+            className="size-5 text-signal transition-transform duration-150 ease-fluid group-hover:translate-x-1"
+            strokeWidth={1.5}
+          />
+        ) : null}
       </span>
+    </>
+  )
+
+  return work.href ? (
+    <ExternalLink href={work.href} className={rowClassName}>
+      {content}
     </ExternalLink>
+  ) : (
+    <div className={rowClassName}>{content}</div>
   )
 }

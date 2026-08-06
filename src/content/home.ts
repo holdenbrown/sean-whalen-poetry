@@ -77,7 +77,7 @@ export const homeContent = {
   archive: {
     railLabel: "INDEX / 04",
     title: `Work, ${publicationYears.earliest}–present`,
-    description: `Explore ${uniqueWorkCount} source-linked works across journal publications and the 2004 thesis Small ecologies.`,
+    description: `Explore ${uniqueWorkCount} documented works across journal publications, print records, forthcoming work, and the 2004 thesis Small ecologies.`,
     action: {
       label: "Explore the full index",
       href: "/work",

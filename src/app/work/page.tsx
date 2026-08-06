@@ -6,10 +6,12 @@ import { ExternalLink } from "@/components/external-link"
 import { StructuredData } from "@/components/structured-data"
 import { siteConfig } from "@/config/site"
 import {
-  publicationCount,
-  publicationYears,
+  bibliographyCount,
+  forthcomingCount,
+  publishedCount,
   thesisArchive,
   thesisOverlapCount,
+  unpublishedCount,
   uniqueWorkCount,
   workPageContent,
   works,
@@ -20,7 +22,7 @@ import { createPageMetadata } from "@/lib/metadata"
 
 export const metadata = createPageMetadata({
   title: "Poems & Publications by Sean Whalen",
-  description: `Explore ${publicationCount} verified publication records and Sean Whalen's ${thesisArchive.poemCount}-poem 2004 Iowa State thesis, Small ecologies—${uniqueWorkCount} unique works, with publications from ${publicationYears.earliest} through ${publicationYears.latest}.`,
+  description: `Explore ${bibliographyCount} verified bibliography records—${publishedCount} published, ${forthcomingCount} forthcoming, and ${unpublishedCount} accepted but unpublished—plus Sean Whalen's ${thesisArchive.poemCount}-poem 2004 Iowa State thesis, Small ecologies.`,
   path: "/work",
   absoluteTitle: true,
 })
@@ -39,7 +41,7 @@ const workSchema = {
       "@id": workUrl + "#collection",
       url: workUrl,
       name: "Poems & Publications by Sean Whalen",
-      description: `A source-linked index of ${publicationCount} publication records and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
+      description: `A documented index of ${bibliographyCount} bibliography records and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
       inLanguage: siteConfig.language,
       isPartOf: {
         "@id": websiteId,
@@ -62,7 +64,7 @@ const workSchema = {
     {
       "@type": "ItemList",
       "@id": publicationIndexId,
-      name: "Sean Whalen publication records",
+      name: "Sean Whalen bibliography records",
       numberOfItems: works.length,
       itemListOrder: "https://schema.org/ItemListOrderDescending",
       itemListElement: works.map((work, index) => ({
@@ -72,7 +74,7 @@ const workSchema = {
           "@type": "CreativeWork",
           "@id": workUrl + "#" + work.id,
           name: work.title,
-          url: work.href,
+          ...(work.href ? { url: work.href } : {}),
           datePublished: String(work.year),
           genre: "Poetry",
           inLanguage: siteConfig.language,
@@ -88,7 +90,12 @@ const workSchema = {
             name: work.venue,
           },
           ...(work.page ? { pagination: String(work.page) } : {}),
-          creativeWorkStatus: "Published",
+          creativeWorkStatus:
+            work.status === "forthcoming"
+              ? "Forthcoming"
+              : work.status === "accepted-unpublished"
+                ? "Accepted; unpublished"
+                : "Published",
         },
       })),
     },
@@ -171,7 +178,7 @@ export default function WorkPage() {
             </p>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-primary-foreground/90">
               {thesisArchive.exactTitleAdditions} exact-title additions extend beyond
-              the publication records below; {thesisOverlapCount} titles overlap.
+              the bibliography records below; {thesisOverlapCount} titles overlap.
               Together, the verified sources account for{" "}
               {thesisArchive.uniqueWorksOverall} unique works.
             </p>
@@ -208,7 +215,7 @@ export default function WorkPage() {
 
       <FieldSection
         railLabel={workPageContent.railLabels.index}
-        aria-label="Source-linked publication records"
+        aria-label="Publication and bibliography records"
         className="border-b border-border"
         contentClassName="py-site-2xl lg:py-site-3xl"
       >
@@ -261,6 +268,17 @@ function ArchiveLink({ href, children }: { href: string; children: string }) {
 }
 
 function workMetadata(work: (typeof worksByYear)[number]["works"][number]) {
-  const details = [work.venue, work.issue, work.page ? `p. ${work.page}` : undefined]
+  const statusLabel =
+    work.status === "forthcoming"
+      ? "Forthcoming"
+      : work.status === "accepted-unpublished"
+        ? "Accepted; unpublished"
+        : undefined
+  const details = [
+    statusLabel,
+    work.venue,
+    work.issue,
+    work.page ? `p. ${work.page}` : undefined,
+  ]
   return details.filter(Boolean).join(" · ")
 }

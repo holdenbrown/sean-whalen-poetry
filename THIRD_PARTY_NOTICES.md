@@ -26,12 +26,17 @@ DEALINGS IN THE SOFTWARE.
 ## Portrait of Sean Whalen
 
 The portrait at `public/images/sean-whalen-portrait.jpg` was supplied for this website by
-the commissioning user from the image published by Thimble Literary Magazine. The image
-retains its original watermark and is visibly credited on the About page to Stacy
-McDonald / The Photician. No separate reuse license is asserted by this repository.
+the commissioning user from the image published by Thimble Literary Magazine. On August
+6, 2026, the commissioning user represented that Sean paid for usage rights to the
+portrait and explicitly directed its use on this website. The repository does not contain
+the underlying license document, so that representation has not been independently
+verified. The image retains its original watermark and is visibly credited on the About
+page to Stacy McDonald / The Photician.
 
 - Source: https://www.thimblelitmag.com/wp-content/uploads/sean-whalen.jpg
 - Photographer: https://photician.com/
+- Website asset SHA-256: `2EFFC67819453431046BBF08ACF941AEF92EE99283A16228D930C72A92C506A7`
+- AI generated: no
 
 ## Northeast Iowa aerial photograph
 

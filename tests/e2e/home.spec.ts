@@ -25,6 +25,20 @@ test("the primary reading path works", async ({ page }) => {
   ).toBeVisible()
 })
 
+test("the footer links to the studio without displacing Sean's identity", async ({
+  page,
+}) => {
+  await page.goto("/")
+
+  const studioCredit = page.getByRole("contentinfo").getByRole("link", {
+    name: /Website by Holden Brown — get help with your site/,
+  })
+
+  await expect(studioCredit).toHaveAttribute("href", "https://holden-sites.pages.dev/")
+  await expect(studioCredit).toHaveAttribute("target", "_blank")
+  await expect(studioCredit).toHaveAttribute("rel", "noopener noreferrer")
+})
+
 const railLabelsByRoute = {
   "/": ["INTRO / 01", "WORK / 02", "ABOUT / 03", "INDEX / 04"],
   "/work/": ["OVERVIEW / 01", "THESIS / 02", "INDEX / 03"],

@@ -13,6 +13,10 @@ export const siteConfig = {
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
   ],
+  studioCredit: {
+    label: "Website by Holden Brown — get help with your site",
+    href: "https://holden-sites.pages.dev/",
+  },
 } as const
 
 export type SiteConfig = typeof siteConfig

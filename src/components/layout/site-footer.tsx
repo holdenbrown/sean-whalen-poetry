@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { ExternalLink } from "@/components/external-link"
 import { siteConfig } from "@/config/site"
 
 export function SiteFooter() {
@@ -36,10 +37,16 @@ export function SiteFooter() {
             ))}
           </nav>
 
-          <div className="flex items-center pt-site-lg md:justify-end md:pt-0 md:pl-site-xl">
-            <p className="max-w-xs font-mono text-sm leading-relaxed text-muted-foreground">
+          <div className="flex flex-col justify-center pt-site-lg md:items-end md:pt-0 md:pl-site-xl">
+            <p className="max-w-xs font-mono text-sm leading-relaxed text-muted-foreground md:text-right">
               Poem links lead to their original publications.
             </p>
+            <ExternalLink
+              href={siteConfig.studioCredit.href}
+              className="mt-3 inline-flex min-h-11 max-w-xs items-center border-b border-border text-sm leading-snug text-foreground transition-colors duration-150 ease-fluid hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:text-right"
+            >
+              {siteConfig.studioCredit.label}
+            </ExternalLink>
           </div>
         </div>
       </div>

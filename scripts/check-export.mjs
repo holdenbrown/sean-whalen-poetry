@@ -4,6 +4,7 @@ import path from "node:path"
 const outputRoot = path.join(process.cwd(), "out")
 const requiredPaths = [
   ".nojekyll",
+  "_headers",
   "404.html",
   "icon.svg",
   "index.html",

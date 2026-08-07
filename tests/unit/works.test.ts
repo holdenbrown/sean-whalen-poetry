@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 
+import { homeContent } from "@/content/home"
 import {
   bibliographyCount,
   forthcomingCount,
@@ -8,6 +9,7 @@ import {
   publicationYears,
   publishedCount,
   selectedWorks,
+  summarizeWorks,
   thesisArchive,
   thesisOnlyCount,
   thesisOverlapCount,
@@ -15,6 +17,7 @@ import {
   unpublishedCount,
   validateWorkRecords,
   workActionLabels,
+  workPageContent,
   works,
   worksByYear,
   workYears,
@@ -32,11 +35,17 @@ const knownThesisOverlaps = [
 describe("Sean Whalen work records", () => {
   it("keeps every publication identity unique", () => {
     expect(bibliographyCount).toBe(works.length)
-    expect(bibliographyCount).toBe(76)
-    expect(publicationCount).toBe(75)
-    expect(publishedCount).toBe(72)
-    expect(forthcomingCount).toBe(3)
-    expect(unpublishedCount).toBe(1)
+    expect(publishedCount).toBe(
+      works.filter((work) => work.status === "published").length
+    )
+    expect(forthcomingCount).toBe(
+      works.filter((work) => work.status === "forthcoming").length
+    )
+    expect(unpublishedCount).toBe(
+      works.filter((work) => work.status === "accepted-unpublished").length
+    )
+    expect(publicationCount).toBe(publishedCount + forthcomingCount)
+    expect(bibliographyCount).toBe(publishedCount + forthcomingCount + unpublishedCount)
     expect(new Set(works.map((work) => work.id)).size).toBe(works.length)
     expect(new Set(works.map((work) => normalizeWorkTitle(work.title))).size).toBe(
       works.length
@@ -50,13 +59,63 @@ describe("Sean Whalen work records", () => {
 
     expect(thesisArchive.poemCount).toBe(46)
     expect(thesisOverlapCount).toBeGreaterThanOrEqual(knownThesisOverlaps.length)
+    expect(thesisOverlapCount).toBe(works.filter((work) => work.thesisOverlap).length)
     expect(thesisOnlyCount).toBe(thesisArchive.poemCount - thesisOverlapCount)
     expect(uniqueWorkCount).toBe(bibliographyCount + thesisOnlyCount)
-    expect(uniqueWorkCount).toBe(103)
     expect(thesisArchive.exactTitleAdditions).toBe(thesisOnlyCount)
     expect(thesisArchive.uniqueWorksOverall).toBe(uniqueWorkCount)
     expect(new URL(thesisArchive.repositoryHref).protocol).toBe("https:")
     expect(new URL(thesisArchive.doiHref).protocol).toBe("https:")
+  })
+
+  it("updates publication totals when new non-thesis records are added", () => {
+    const nextStatistics = summarizeWorks(
+      [
+        ...works,
+        { status: "published", thesisOverlap: false },
+        { status: "forthcoming", thesisOverlap: false },
+        { status: "accepted-unpublished", thesisOverlap: false },
+      ],
+      thesisArchive.poemCount
+    )
+
+    expect(nextStatistics.bibliographyCount).toBe(bibliographyCount + 3)
+    expect(nextStatistics.publishedCount).toBe(publishedCount + 1)
+    expect(nextStatistics.forthcomingCount).toBe(forthcomingCount + 1)
+    expect(nextStatistics.unpublishedCount).toBe(unpublishedCount + 1)
+    expect(nextStatistics.publicationCount).toBe(publicationCount + 2)
+    expect(nextStatistics.thesisPoemCount).toBe(thesisArchive.poemCount)
+    expect(nextStatistics.thesisOverlapCount).toBe(thesisOverlapCount)
+    expect(nextStatistics.thesisOnlyCount).toBe(thesisOnlyCount)
+    expect(nextStatistics.uniqueWorkCount).toBe(uniqueWorkCount + 3)
+  })
+
+  it("does not double-count a new publication record for an existing thesis poem", () => {
+    const nextStatistics = summarizeWorks(
+      [...works, { status: "published", thesisOverlap: true }],
+      thesisArchive.poemCount
+    )
+
+    expect(nextStatistics.bibliographyCount).toBe(bibliographyCount + 1)
+    expect(nextStatistics.thesisPoemCount).toBe(thesisArchive.poemCount)
+    expect(nextStatistics.thesisOverlapCount).toBe(thesisOverlapCount + 1)
+    expect(nextStatistics.thesisOnlyCount).toBe(thesisOnlyCount - 1)
+    expect(nextStatistics.uniqueWorkCount).toBe(uniqueWorkCount)
+  })
+
+  it("uses the shared derived totals in every highlighted piece of copy", () => {
+    expect(workPageContent.summary).toBe(
+      `${bibliographyCount} bibliography records · ${publishedCount} published · ${forthcomingCount} forthcoming · ${uniqueWorkCount} verified works overall`
+    )
+    expect(workPageContent.description).toContain(
+      `${publicationCount} published or forthcoming poems`
+    )
+    expect(workPageContent.description).toContain(
+      `${unpublishedCount} accepted-but-unpublished record`
+    )
+    expect(homeContent.selectedPublications.action.label).toBe(
+      `View all ${uniqueWorkCount} verified works`
+    )
   })
 
   it("keeps every source secure and every action label derived from access", () => {

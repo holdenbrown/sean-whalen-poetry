@@ -37,6 +37,18 @@ export type WorksYearGroup = Readonly<{
   works: readonly Work[]
 }>
 
+export type WorkStatistics = Readonly<{
+  bibliographyCount: number
+  publishedCount: number
+  forthcomingCount: number
+  unpublishedCount: number
+  publicationCount: number
+  thesisPoemCount: number
+  thesisOverlapCount: number
+  thesisOnlyCount: number
+  uniqueWorkCount: number
+}>
+
 export type ThesisArchive = Readonly<{
   id: string
   title: string
@@ -760,15 +772,17 @@ export const works: readonly Work[] = [
   ...validatedAdditions,
 ].sort(compareWorks)
 
-export const bibliographyCount = works.length
-export const unpublishedCount = works.filter(
-  (work) => work.status === "accepted-unpublished"
-).length
-export const forthcomingCount = works.filter(
-  (work) => work.status === "forthcoming"
-).length
-export const publicationCount = bibliographyCount - unpublishedCount
-export const publishedCount = publicationCount - forthcomingCount
+export const workStatistics = summarizeWorks(works, thesisArchiveSource.poemCount)
+export const {
+  bibliographyCount,
+  unpublishedCount,
+  forthcomingCount,
+  publicationCount,
+  publishedCount,
+  thesisOverlapCount,
+  thesisOnlyCount,
+  uniqueWorkCount,
+} = workStatistics
 export const workYears: readonly number[] = [...new Set(works.map((work) => work.year))]
 
 if (workYears.length === 0) {
@@ -785,20 +799,66 @@ export const worksByYear: readonly WorksYearGroup[] = workYears.map((year) => ({
   works: works.filter((work) => work.year === year),
 }))
 
-export const thesisOverlapCount = works.filter((work) => work.thesisOverlap).length
-export const thesisOnlyCount = thesisArchiveSource.poemCount - thesisOverlapCount
-
-if (thesisOnlyCount < 0) {
-  throw new Error("Thesis overlap count exceeds the thesis poem count")
-}
-
-export const uniqueWorkCount = bibliographyCount + thesisOnlyCount
-
 export const thesisArchive = {
   ...thesisArchiveSource,
   exactTitleAdditions: thesisOnlyCount,
   uniqueWorksOverall: uniqueWorkCount,
 } as const satisfies ThesisArchive
+
+export function summarizeWorks(
+  records: readonly Pick<Work, "status" | "thesisOverlap">[],
+  thesisPoemCount: number
+): WorkStatistics {
+  if (!Number.isInteger(thesisPoemCount) || thesisPoemCount < 0) {
+    throw new TypeError("Thesis poem count must be a non-negative integer")
+  }
+
+  let publishedCount = 0
+  let forthcomingCount = 0
+  let unpublishedCount = 0
+  let thesisOverlapCount = 0
+
+  for (const record of records) {
+    switch (record.status) {
+      case "published":
+        publishedCount += 1
+        break
+      case "forthcoming":
+        forthcomingCount += 1
+        break
+      case "accepted-unpublished":
+        unpublishedCount += 1
+        break
+      default:
+        throw new TypeError(`Unknown work status: ${String(record.status)}`)
+    }
+
+    if (record.thesisOverlap) {
+      thesisOverlapCount += 1
+    }
+  }
+
+  if (thesisOverlapCount > thesisPoemCount) {
+    throw new Error("Thesis overlap count exceeds the thesis poem count")
+  }
+
+  const bibliographyCount = records.length
+  const publicationCount = publishedCount + forthcomingCount
+  const thesisOnlyCount = thesisPoemCount - thesisOverlapCount
+  const uniqueWorkCount = bibliographyCount + thesisOnlyCount
+
+  return {
+    bibliographyCount,
+    publishedCount,
+    forthcomingCount,
+    unpublishedCount,
+    publicationCount,
+    thesisPoemCount,
+    thesisOverlapCount,
+    thesisOnlyCount,
+    uniqueWorkCount,
+  }
+}
 
 function compareWorks(left: Work, right: Work) {
   return (
@@ -865,7 +925,11 @@ export const workPageContent = {
   },
   title: "Work",
   summary: `${bibliographyCount} bibliography records · ${publishedCount} published · ${forthcomingCount} forthcoming · ${uniqueWorkCount} verified works overall`,
-  description: `A documented index of ${publicationCount} published or forthcoming poems, one accepted-but-unpublished record, and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${uniqueWorkCount} unique verified works.`,
+  description: `A documented index of ${formatCount(publicationCount, "published or forthcoming poem")}, ${formatCount(unpublishedCount, "accepted-but-unpublished record")}, and the ${thesisArchive.poemCount}-poem thesis Small ecologies, representing ${formatCount(uniqueWorkCount, "unique verified work")}.`,
   note: "Print-only records come from Sean's August 3, 2026 publication list. Forthcoming and unpublished entries are labeled rather than presented as released work.",
   updateNote: `Updated from Sean's publication list dated August 3, 2026. Links lead to poem, issue, or publisher records when a secure public source is available.`,
 } as const
+
+function formatCount(count: number, singular: string) {
+  return `${count} ${singular}${count === 1 ? "" : "s"}`
+}

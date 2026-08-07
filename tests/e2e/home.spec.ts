@@ -114,17 +114,103 @@ test("the work index exposes every bibliography record and the thesis archive", 
 
   const publicationSummary = page.getByText(/^\d+ bibliography records ·/)
   const publicationSummaryText = await publicationSummary.innerText()
-  const expectedBibliographyCount = Number(publicationSummaryText.match(/^\d+/)?.[0])
-
-  expect(expectedBibliographyCount).toBe(76)
-  await expect(page.locator("#published-work-index").locator("li")).toHaveCount(
-    expectedBibliographyCount
+  const summaryMatch = requireMatch(
+    publicationSummaryText.match(
+      /^(\d+) bibliography records · (\d+) published · (\d+) forthcoming · (\d+) verified works overall$/
+    ),
+    "publication summary"
   )
+  const bibliography = matchNumber(summaryMatch, 1)
+  const published = matchNumber(summaryMatch, 2)
+  const forthcoming = matchNumber(summaryMatch, 3)
+  const unique = matchNumber(summaryMatch, 4)
+
+  await expect(page.locator("#published-work-index").locator("li")).toHaveCount(
+    bibliography
+  )
+
+  const descriptionText = await page.getByText(/^A documented index of/).innerText()
+  const descriptionMatch = requireMatch(
+    descriptionText.match(
+      /^A documented index of (\d+) published or forthcoming poems, (\d+) accepted-but-unpublished record(?:s)?, and the (\d+)-poem thesis Small ecologies, representing (\d+) unique verified works\.$/
+    ),
+    "work-page description"
+  )
+  const publication = matchNumber(descriptionMatch, 1)
+  const unpublished = matchNumber(descriptionMatch, 2)
+  const thesisPoems = matchNumber(descriptionMatch, 3)
+  const describedUnique = matchNumber(descriptionMatch, 4)
+
+  const thesisDetailsText = await page
+    .getByText(/exact-title additions extend beyond/)
+    .innerText()
+  const thesisDetailsMatch = requireMatch(
+    thesisDetailsText.match(
+      /^(\d+) exact-title additions extend beyond the bibliography records below; (\d+) titles overlap\. Together, the verified sources account for (\d+) unique works\.$/
+    ),
+    "thesis detail"
+  )
+  const thesisOnly = matchNumber(thesisDetailsMatch, 1)
+  const thesisOverlap = matchNumber(thesisDetailsMatch, 2)
+  const thesisUnique = matchNumber(thesisDetailsMatch, 3)
+
+  expect(publication).toBe(published + forthcoming)
+  expect(bibliography).toBe(publication + unpublished)
+  expect(thesisPoems).toBe(46)
+  expect(thesisOnly).toBe(thesisPoems - thesisOverlap)
+  expect(unique).toBe(bibliography + thesisOnly)
+  expect(describedUnique).toBe(unique)
+  expect(thesisUnique).toBe(unique)
+
+  await expect(
+    page.getByText("POEMS", { exact: true }).locator("xpath=following-sibling::dd")
+  ).toHaveText(String(thesisPoems))
+  await expect(
+    page
+      .getByText("ARCHIVE-ONLY", { exact: true })
+      .locator("xpath=following-sibling::dd")
+  ).toHaveText(String(thesisOnly))
+  await expect(
+    page
+      .getByText("UNIQUE WORKS", { exact: true })
+      .locator("xpath=following-sibling::dd")
+  ).toHaveText(String(unique))
   await expect(page.getByText(/Forthcoming · Lyrical Iowa/)).toBeVisible()
   await expect(page.getByText(/Accepted; unpublished · Lakeshore Review/)).toBeVisible()
   await expect(
     page.getByRole("link", { name: /Institutional record/ })
   ).toHaveAttribute("href", "https://dr.lib.iastate.edu/handle/20.500.12876/69962")
+})
+
+test("the homepage work total stays synchronized with the full index", async ({
+  page,
+}) => {
+  await page.goto("/")
+
+  const workIndexLink = page.getByRole("link", {
+    name: /^View all \d+ verified works$/,
+  })
+  const homeLinkText = await workIndexLink.innerText()
+  const homeUniqueCount = matchNumber(
+    requireMatch(homeLinkText.match(/(\d+)/), "homepage work total"),
+    1
+  )
+
+  await workIndexLink.click()
+  await expect(page).toHaveURL(/\/work\/$/)
+
+  const workSummaryText = await page
+    .getByText(/^\d+ bibliography records ·/)
+    .innerText()
+  const workUniqueCount = matchNumber(
+    requireMatch(
+      workSummaryText.match(/(\d+) verified works overall$/),
+      "work-page unique total"
+    ),
+    1
+  )
+
+  expect(homeUniqueCount).toBe(workUniqueCount)
 })
 
 test("the about page presents the verified biography", async ({ page }) => {
@@ -166,3 +252,21 @@ test("mobile navigation exposes every shared link", async ({ page }, testInfo) =
   await expect(page.getByRole("heading", { level: 1, name: "Work" })).toBeVisible()
   await expect(mobileNavigation).not.toHaveAttribute("open", "")
 })
+
+function requireMatch(match: RegExpMatchArray | null, label: string): RegExpMatchArray {
+  if (!match) {
+    throw new Error(`Unable to parse ${label}`)
+  }
+
+  return match
+}
+
+function matchNumber(match: RegExpMatchArray, index: number) {
+  const value = match[index]
+
+  if (value === undefined) {
+    throw new Error(`Missing numeric capture ${index}`)
+  }
+
+  return Number(value)
+}

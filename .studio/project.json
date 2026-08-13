@@ -1,0 +1,30 @@
+{
+  "id": "sean-whalen-poetry",
+  "name": "Sean Whalen Poetry",
+  "kind": "client",
+  "initialStatus": "review",
+  "createdAt": "2026-08-03T01:10:03-05:00",
+  "domain": "https://holdenbrown.github.io/sean-whalen-poetry/",
+  "git": {
+    "workflow": "pull-request",
+    "productionBranch": "main",
+    "remoteUrl": "https://github.com/holdenbrown/sean-whalen-poetry.git"
+  },
+  "repository": {
+    "visibilityTarget": "public"
+  },
+  "review": {
+    "siteVisibility": "public-existing-deployment",
+    "visibilityTarget": "review",
+    "accessMode": "public",
+    "indexing": "unresolved"
+  },
+  "deployment": {
+    "provider": "github-pages",
+    "projectName": "sean-whalen-poetry",
+    "productionBranch": "main",
+    "buildCommand": "pnpm verify",
+    "outputDirectory": "out",
+    "mode": "git-integration"
+  }
+}

@@ -9,8 +9,12 @@ heed deprecation notices.
 
 # Working agreement
 
-This repository is a reusable website starter. Preserve its separation between site
-identity, page content, UI primitives, route composition, and deployment logic.
+This repository is the existing Sean Whalen poetry portfolio. Resume its current
+implementation and preserve the separation between site identity, page content, UI
+primitives, route composition, and deployment logic. It is not a reusable starter or a
+greenfield concept workspace. The current release candidate uses a pull-request workflow
+and must not reach `main` until the named-human gates in `STATUS.md` and
+`docs/agent-handoff.md` are resolved.
 
 ## Start here
 

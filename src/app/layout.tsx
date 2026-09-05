@@ -135,7 +135,7 @@ export default function RootLayout({
           href="#main-content"
           className="fixed top-3 left-3 z-60 -translate-y-24 rounded-md bg-foreground px-4 py-3 text-sm font-medium text-background transition-transform duration-150 ease-fluid focus:translate-y-0"
         >
-          Skip to content
+          Skip to main content
         </a>
         <StructuredData data={websiteSchema} />
         <SiteHeader />

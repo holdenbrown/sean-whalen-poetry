@@ -15,7 +15,7 @@ export const homeContent = {
       label: "About Sean",
       href: "/about",
     },
-    identity: "Poet · Rural Boone County, Iowa",
+    identity: "Poet in rural Boone County, Iowa",
     artwork: heroArtwork,
   },
   socialSummary:

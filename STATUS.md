@@ -39,4 +39,3 @@ Updated: 2026-08-07
 - Confirm final biography, portrait rights, and publication linking approvals.
 - Verify desktop/mobile browser runs and accessibility checks against the intended
   production-origin behavior.
-
